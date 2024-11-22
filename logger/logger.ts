@@ -1,3 +1,8 @@
+/**
+ * @module
+ * A pre-configured logger that is ready to use with syslog levels.
+ */
+
 // load packages
 import os from 'node:os'
 import process from 'node:process'
@@ -19,8 +24,12 @@ const convertError = format((event) => {
 	return event
 })
 
-// Detect the process version
-const detectProcessVersion = () => {
+/**
+ * Detect and return the process version
+ *
+ * @returns {string} the process version (e.g. `bun-1.1.23`, `deno-1.3.2`, `node-20.11.0`)
+ */
+export const detectProcessVersion = (): string => {
 	if (process.versions?.bun) return `bun-${process.versions.bun}`
 	if (process.versions?.deno) return `deno-${process.versions.deno}`
 	return process.version
@@ -48,8 +57,43 @@ if (process.env.IS_LOCAL === 'true') {
 	)
 }
 
-// Initialize logger
-const logger: Logger = createLogger({
+/**
+ * Use the exported logger to log messages.
+ *
+ * @param {Object} event
+ * @param {string} event.level - one of the syslog levels
+ * @param {string} event.message - the log message
+ * @param {string} event.source - the source of the log message (e.g. function or file name)
+ * @param {Error} event.error - an error object to log
+ * @param {Object} event.data - additional data to log (object)
+ *
+ * @example basic log
+ * ```ts
+ * import { logger } from 'jsr:@frytg/logger'
+ *
+ * logger.log({
+ *   level: 'debug',
+ *   message: 'my log message',
+ *   source: 'folder-a/file-b/function-c',
+ *   data: { name: 'my-data' },
+ * })
+ * ```
+ *
+ * @example log with error
+ * ```ts
+ * // ...
+ * } catch (error) {
+ *   logger.log({
+ *     level: 'error',
+ *     message: 'some bad xyz thing happened',
+ *     source: 'folder-a/file-b/function-c',
+ *     data: { name: 'my-data' },
+ *     error,
+ *   })
+ * }
+ * ```
+ */
+export const logger: Logger = createLogger({
 	level: process.env.STAGE === 'dev' ? 'debug' : 'info',
 	levels: config.syslog.levels,
 	exitOnError: false,

@@ -15,7 +15,7 @@
 			"semicolons": "asNeeded",
 			"trailingCommas": "all"
 		},
-		"globals": ["cast", "Bun"]
+		"globals": ["cast", "Bun", "Deno"]
 	},
 	"linter": {
 		"enabled": true,
@@ -24,7 +24,7 @@
 			"correctness": {
 				"all": true,
 				"noNodejsModules": "off",
-				"noUndeclaredDependencies": "info"
+				"noUndeclaredDependencies": "off"
 			},
 			"performance": {
 				"all": true

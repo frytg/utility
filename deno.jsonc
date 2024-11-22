@@ -11,10 +11,11 @@
 		"useTabs": true,
 		"lineWidth": 120,
 		"semiColons": false,
-		"singleQuote": true
+		"singleQuote": true,
+		"exclude": ["**/*.md"]
 	},
 	"tasks": {
-		"check": "deno fmt --check"
+		"check": "deno fmt --check && deno lint && biome lint"
 	},
 	"lint": {
 		"rules": {
@@ -25,9 +26,10 @@
 				"verbatim-module-syntax",
 				"no-console"
 			]
-		}
+		},
+		"exclude": ["**/*.md"]
 	},
-	"workspace": ["./logger"],
+	"workspace": ["./check-required-env", "./logger"],
 	"imports": {
 		"@biomejs/biome": "npm:@biomejs/biome@^1.9.4",
 		"@types/node": "npm:@types/node@^22.9.0"
