@@ -1,0 +1,9 @@
+{
+	"$schema": "https://jsr.io/schema/config-file.v1.json",
+	"name": "@frytg/check-required-env",
+	"version": "0.0.1",
+	"exports": "./check-required-env.ts",
+	"imports": {
+		"@frytg/logger": "jsr:@frytg/logger@0.0.1"
+	}
+}
