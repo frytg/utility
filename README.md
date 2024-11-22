@@ -20,6 +20,19 @@ Use `deno fmt`, `deno lint` and `biome lint` to check the code.
 deno task check
 ```
 
+See [_Writing documentation_](https://jsr.io/docs/writing-docs) for details about writing JSDoc.
+
+## Publish
+
+Locally check if everything is ok:
+
+```bash
+deno publish --dry-run
+```
+
+Then once everything is pushed or merged on `main`, run the GitHub actions workflow to publish the packages to JSR
+(see [_publishing packages_](https://jsr.io/docs/publishing-packages) for more details).
+
 ## Author
 
 Created by [@frytg](https://github.com/frytg) / [frytg.digital](https://www.frytg.digital)

@@ -10,9 +10,9 @@ import logger from '@frytg/logger'
  *
  * @example
  * ```ts
- * import { checkRequiredEnv } from 'jsr:@frytg/check-required-env';
+ * import { checkRequiredEnv } from 'jsr:@frytg/check-required-env'
  *
- * checkRequiredEnv('MY_IMPORTANT_ENV_VAR');
+ * checkRequiredEnv('MY_IMPORTANT_ENV_VAR')
  * ```
  */
 export const checkRequiredEnv = (name: string): void => {
