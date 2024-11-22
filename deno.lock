@@ -1,20 +1,11 @@
 {
   "version": "4",
   "specifiers": {
-    "jsr:@frytg/logger@0.0.1": "0.0.1",
     "npm:@biomejs/biome@1.9.4": "1.9.4",
     "npm:@biomejs/biome@^1.9.4": "1.9.4",
     "npm:@types/node@*": "22.5.4",
     "npm:@types/node@^22.9.0": "22.9.0",
     "npm:winston@^3.17.0": "3.17.0"
-  },
-  "jsr": {
-    "@frytg/logger@0.0.1": {
-      "integrity": "020810f00dc6a81075031d4e6b4531e246d2a1cab02a7c52a76fe16060deb27b",
-      "dependencies": [
-        "npm:winston"
-      ]
-    }
   },
   "npm": {
     "@biomejs/biome@1.9.4": {
@@ -249,7 +240,7 @@
     "members": {
       "check-required-env": {
         "dependencies": [
-          "jsr:@frytg/logger@0.0.1"
+          "jsr:@frytg/logger@0.0.2"
         ]
       },
       "logger": {

@@ -4,6 +4,6 @@
 	"version": "0.0.1",
 	"exports": "./check-required-env.ts",
 	"imports": {
-		"@frytg/logger": "jsr:@frytg/logger@0.0.1"
+		"@frytg/logger": "jsr:@frytg/logger@0.0.2"
 	}
 }

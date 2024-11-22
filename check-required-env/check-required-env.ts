@@ -1,6 +1,6 @@
 // load packages
 import process from 'node:process'
-import logger from 'jsr:@frytg/logger'
+import logger from '@frytg/logger'
 
 /**
  * Check if an environment variable is required and log an alert and exit if it is not set.
