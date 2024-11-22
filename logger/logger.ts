@@ -11,7 +11,7 @@ const hostName = os.hostname()
 const convertError = format((event) => {
 	if (event?.error instanceof Error) {
 		event.error = {
-			code: event.error.code,
+			...event.error,
 			message: event.error.message,
 			stack: event.error.stack,
 		}
