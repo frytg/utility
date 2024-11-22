@@ -1,0 +1,35 @@
+{
+	"compilerOptions": {
+		"strict": true,
+		"exactOptionalPropertyTypes": true,
+		"useUnknownInCatchVariables": true,
+		"noImplicitOverride": true,
+		"noUncheckedIndexedAccess": true
+	},
+	"exclude": [".git"],
+	"fmt": {
+		"useTabs": true,
+		"lineWidth": 120,
+		"semiColons": false,
+		"singleQuote": true
+	},
+	"tasks": {
+		"check": "deno fmt --check"
+	},
+	"lint": {
+		"rules": {
+			"include": [
+				"camelcase",
+				"no-sync-fn-in-async-fn",
+				"single-var-declarator",
+				"verbatim-module-syntax",
+				"no-console"
+			]
+		}
+	},
+	"workspace": ["./logger"],
+	"imports": {
+		"@biomejs/biome": "npm:@biomejs/biome@^1.9.4",
+		"@types/node": "npm:@types/node@^22.9.0"
+	}
+}

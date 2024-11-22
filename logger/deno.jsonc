@@ -1,0 +1,9 @@
+{
+	"$schema": "https://jsr.io/schema/config-file.v1.json",
+	"name": "@frytg/logger",
+	"version": "0.0.1",
+	"exports": "./logger.ts",
+	"imports": {
+		"winston": "npm:winston@^3.17.0"
+	}
+}
