@@ -1,0 +1,9 @@
+{
+	"$schema": "https://jsr.io/schema/config-file.v1.json",
+	"name": "@frytg/dates",
+	"version": "0.0.1",
+	"exports": "./dates.ts",
+	"imports": {
+		"luxon": "npm:luxon@^3.5.0"
+	}
+}
