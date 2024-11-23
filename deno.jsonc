@@ -6,13 +6,13 @@
 		"noImplicitOverride": true,
 		"noUncheckedIndexedAccess": true
 	},
-	"exclude": [".git"],
+	"exclude": [".git", ".github"],
 	"fmt": {
 		"useTabs": true,
 		"lineWidth": 120,
 		"semiColons": false,
 		"singleQuote": true,
-		"exclude": ["**/*.md"]
+		"exclude": ["**/*.md", "**/*.yml", "**/*.yaml"]
 	},
 	"tasks": {
 		"check": "deno fmt --check && deno lint && biome lint"
@@ -27,9 +27,9 @@
 				"no-console"
 			]
 		},
-		"exclude": ["**/*.md"]
+		"exclude": ["**/*.md", "**/*.yml", "**/*.yaml"]
 	},
-	"workspace": ["./check-required-env", "./logger"],
+	"workspace": ["./check-required-env", "./dates", "./logger"],
 	"imports": {
 		"@biomejs/biome": "npm:@biomejs/biome@^1.9.4",
 		"@types/node": "npm:@types/node@^22.9.0"
