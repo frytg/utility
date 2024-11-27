@@ -1,7 +1,8 @@
 // load package
 import { DateTime } from 'luxon'
 
-const localTimeZone = 'Europe/Amsterdam'
+const LOCAL_TIMEZONE = 'Europe/Amsterdam'
+const DATE_HOUR_MINUTES_FORMAT = 'ccc, d. LLLL yyyy - h:mma'
 
 /**
  * Luxon DateTime
@@ -20,7 +21,7 @@ export { DateTime }
  * toLocal(getNow())
  * ```
  */
-export const toLocal = (date: DateTime): DateTime => date.setZone(localTimeZone)
+export const toLocal = (date: DateTime): DateTime => date.setZone(LOCAL_TIMEZONE)
 
 /**
  * Converts ms timestamp to s
@@ -182,7 +183,6 @@ export const parseIso = parseISO
  * getDateHourMinutes(getNow())
  * ```
  */
-const DATE_HOUR_MINUTES_FORMAT = 'ccc, d. LLLL yyyy - h:mma'
 export const getDateHourMinutes = (date: DateTime): string =>
 	`${date.setLocale('en').toFormat(DATE_HOUR_MINUTES_FORMAT)}`
 

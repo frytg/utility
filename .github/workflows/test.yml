@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 jobs:
-  test-deno:
+  test-on-deno-and-lint:
     runs-on: ${{ matrix.os }}
     timeout-minutes: 5
     strategy:
@@ -27,7 +27,6 @@ jobs:
           - ubuntu-latest
           - windows-latest
           - macOS-latest
-
     steps:
       - name: Set line ending for Windows
         if: matrix.os == 'windows-latest'
@@ -42,14 +41,90 @@ jobs:
           deno-version: canary
 
       - name: Install dependencies
-        run: deno install
+        run: deno install --vendor
 
       - name: Format & Check
         run: deno run check
 
-      #      - name: Test
-      #        run: deno task test
+      - name: Test
+        run: deno test
 
       - name: Publish dry run
         run: deno publish --dry-run
         if: matrix.os == 'ubuntu-latest'
+
+  test-on-bun:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macOS-latest
+    steps:
+      - name: Set line ending for Windows
+        if: matrix.os == 'windows-latest'
+        run: git config --global core.autocrlf false
+
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Bun version
+        run: bun --version
+
+      - name: Install JSR dependencies
+        run: bunx jsr add @cross/test @std/assert
+
+      - name: Install NPM dependencies
+        run: bun add luxon
+
+      - name: Test
+        run: bun test
+
+  test-on-node:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 5
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version:
+          - 20
+          - 22
+          - 23
+        os:
+          - ubuntu-latest
+          - windows-latest
+          - macOS-latest
+    steps:
+      - name: Set line ending for Windows
+        if: matrix.os == 'windows-latest'
+        run: git config --global core.autocrlf false
+
+      - name: Clone repository
+        uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install JSR dependencies
+        run: npx jsr add @cross/test @std/assert
+
+      - name: Install NPM dependencies
+        run: npm install luxon
+
+      - name: Node version
+        run: node --version
+
+      - name: Set up package.json
+        run: 'echo ''{ "type": "module" }'' > package.json'
+
+      - name: Test
+        run: npx --yes tsx --test **/*.test.ts
