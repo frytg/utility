@@ -40,6 +40,9 @@ jobs:
         with:
           deno-version: canary
 
+      - name: Deno version
+        run: deno --version
+
       - name: Install dependencies
         run: deno install --vendor
 
@@ -114,21 +117,25 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Node version
+        run: node --version
+
       - name: Install JSR dependencies
         run: npx jsr add @cross/test @std/assert
 
       - name: Install NPM dependencies
         run: npm install luxon
 
-      - name: Node version
-        run: node --version
-
       - name: Set up package.json
         run: 'echo ''{ "type": "module" }'' > package.json'
 
       - name: Test (Windows)
         if: matrix.os == 'windows-latest'
-        run: npx --yes glob "**/*.test.ts" | xargs -I {} npx tsx --test "{}"
+        run: |
+          $files = npx --yes glob "**/*.test.ts"
+          foreach ($file in $files) {
+            npx tsx --test $file
+          }
         shell: pwsh
 
       - name: Test (Linux/macOS)
