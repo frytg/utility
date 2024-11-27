@@ -13,5 +13,6 @@ keys/*
 
 # Dependency directories
 node_modules/
+vendor/
 
 tmp
