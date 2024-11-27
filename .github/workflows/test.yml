@@ -83,7 +83,7 @@ jobs:
         run: bun --version
 
       - name: Install JSR dependencies
-        run: bunx jsr add @cross/test @std/assert
+        run: bunx jsr add @cross/test @std/assert @frytg/logger
 
       - name: Install NPM dependencies
         run: bun add luxon
@@ -121,7 +121,7 @@ jobs:
         run: node --version
 
       - name: Install JSR dependencies
-        run: npx jsr add @cross/test @std/assert
+        run: npx jsr add @cross/test @std/assert @frytg/logger
 
       - name: Install NPM dependencies
         run: npm install luxon
