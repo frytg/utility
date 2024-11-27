@@ -15,7 +15,8 @@
 		"exclude": ["**/*.md", "**/*.yml", "**/*.yaml"]
 	},
 	"tasks": {
-		"check": "deno fmt --check && deno lint && biome lint"
+		"check": "deno fmt --check && deno lint && biome lint",
+		"test": "deno test --allow-sys --allow-env"
 	},
 	"lint": {
 		"rules": {

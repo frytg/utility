@@ -50,7 +50,7 @@ jobs:
         run: deno run check
 
       - name: Test
-        run: deno test
+        run: deno run test
 
       - name: Publish dry run
         run: deno publish --dry-run
