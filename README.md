@@ -1,6 +1,7 @@
 # Utility packages
 
 [![JSR @frytg](https://jsr.io/badges/@frytg)](https://jsr.io/@frytg)
+[![ci](https://github.com/frytg/utility/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/frytg/utility/actions/workflows/test.yml)
 [![Linted with Biome](https://img.shields.io/badge/Linted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
 
 A collection of utilities for TypeScript and JavaScript.

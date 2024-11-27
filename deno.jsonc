@@ -6,7 +6,7 @@
 		"noImplicitOverride": true,
 		"noUncheckedIndexedAccess": true
 	},
-	"exclude": [".git", ".github"],
+	"exclude": [".git", ".github", "vendor"],
 	"fmt": {
 		"useTabs": true,
 		"lineWidth": 120,

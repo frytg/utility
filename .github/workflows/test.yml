@@ -126,5 +126,10 @@ jobs:
       - name: Set up package.json
         run: 'echo ''{ "type": "module" }'' > package.json'
 
-      - name: Test
-        run: npx --yes tsx --test **/*.test.ts
+      - name: Test (Windows)
+        if: matrix.os == 'windows-latest'
+        run: npx --yes tsx --test "**\*.test.ts"
+
+      - name: Test (Linux/macOS)
+        if: matrix.os != 'windows-latest'
+        run: npx --yes tsx --test "**/*.test.ts"
