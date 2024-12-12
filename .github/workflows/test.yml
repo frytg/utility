@@ -16,6 +16,10 @@ on:
 permissions:
   contents: read
 
+env:
+  JSR_DEPENDENCIES: "@cross/test @std/assert @frytg/logger"
+  NPM_DEPENDENCIES: "luxon sinon"
+
 jobs:
   test-on-deno-and-lint:
     runs-on: ${{ matrix.os }}
@@ -83,10 +87,10 @@ jobs:
         run: bun --version
 
       - name: Install JSR dependencies
-        run: bunx jsr add @cross/test @std/assert @frytg/logger
+        run: bunx jsr add ${{ env.JSR_DEPENDENCIES }}
 
       - name: Install NPM dependencies
-        run: bun add luxon
+        run: bun add ${{ env.NPM_DEPENDENCIES }}
 
       - name: Test
         run: bun test
@@ -121,10 +125,10 @@ jobs:
         run: node --version
 
       - name: Install JSR dependencies
-        run: npx jsr add @cross/test @std/assert @frytg/logger
+        run: npx jsr add ${{ env.JSR_DEPENDENCIES }}
 
       - name: Install NPM dependencies
-        run: npm install luxon
+        run: npm install ${{ env.NPM_DEPENDENCIES }}
 
       - name: Set up package.json
         run: 'echo ''{ "type": "module" }'' > package.json'

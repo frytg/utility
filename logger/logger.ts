@@ -46,16 +46,14 @@ const convertGlobals = format((event) => {
 })
 
 // Set up format based on environment
-let formatConfig: Logform.Format = format.combine(convertError(), convertGlobals(), format.json())
-if (process.env.IS_LOCAL === 'true') {
-	formatConfig = format.combine(
-		convertError(),
-		convertGlobals(),
-		format.timestamp(),
-		format.json({ space: 4 }),
-		format.colorize({ all: true }),
-	)
-}
+const formatConfig: Logform.Format = format.combine(convertError(), convertGlobals(), format.json())
+const formatConfigLocal: Logform.Format = format.combine(
+	convertError(),
+	convertGlobals(),
+	format.timestamp(),
+	format.json({ space: 4 }),
+	format.colorize({ all: true }),
+)
 
 /**
  * Use the exported logger to log messages.
@@ -97,7 +95,7 @@ export const logger: Logger = createLogger({
 	level: process.env.STAGE === 'dev' ? 'debug' : 'info',
 	levels: config.syslog.levels,
 	exitOnError: false,
-	format: formatConfig,
+	format: process.env.IS_LOCAL === 'true' ? formatConfigLocal : formatConfig,
 	transports: [new transports.Console()],
 })
 

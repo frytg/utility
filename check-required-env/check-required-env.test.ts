@@ -1,45 +1,39 @@
 import process from 'node:process'
 import { test } from '@cross/test'
-import { assertEquals, assertExists } from '@std/assert'
+import { assertExists } from '@std/assert'
+import sinon from 'sinon'
 
 import { checkRequiredEnv } from './check-required-env.ts'
 
 test('checkRequiredEnv - returns when env variable exists', () => {
 	// Setup
-	const testVarName = 'TEST_ENV_VAR'
-	process.env[testVarName] = 'test-value'
+	const envStub = sinon.stub(process, 'env').value({
+		TEST_ENV_VAR: 'test-value',
+	})
 
 	// Test
-	checkRequiredEnv(testVarName)
+	checkRequiredEnv('TEST_ENV_VAR')
 
 	// Verify
-	assertExists(process.env[testVarName])
+	assertExists(process.env.TEST_ENV_VAR)
 
 	// Cleanup
-	delete process.env[testVarName]
+	envStub.restore()
 })
 
 test('checkRequiredEnv - exits when env variable is missing', () => {
 	// Setup
-	const testVarName = 'MISSING_ENV_VAR'
-	const originalExit = process.exit
-	let exitCalled = false
-	let exitCode: number | undefined
-
-	// Mock process.exit
-	process.exit = ((code?: number) => {
-		exitCalled = true
-		exitCode = code
-		// Don't actually exit
-	}) as typeof process.exit
+	const envStub = sinon.stub(process, 'env').value({})
+	const exitStub = sinon.stub(process, 'exit')
 
 	// Test
-	checkRequiredEnv(testVarName)
+	checkRequiredEnv('MISSING_ENV_VAR')
 
 	// Verify
-	assertEquals(exitCalled, true)
-	assertEquals(exitCode, 1)
+	sinon.assert.calledOnce(exitStub)
+	sinon.assert.calledWith(exitStub, 1)
 
 	// Cleanup
-	process.exit = originalExit
+	exitStub.restore()
+	envStub.restore()
 })
