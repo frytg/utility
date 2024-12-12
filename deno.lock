@@ -5,6 +5,7 @@
     "jsr:@cross/test@^0.0.10": "0.0.10",
     "jsr:@frytg/logger@0.0.2": "0.0.2",
     "jsr:@std/assert@^1.0.9": "1.0.9",
+    "jsr:@std/fmt@^1.0.3": "1.0.3",
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "npm:@biomejs/biome@1.9.4": "1.9.4",
     "npm:@biomejs/biome@^1.9.4": "1.9.4",
@@ -35,6 +36,9 @@
       "dependencies": [
         "jsr:@std/internal"
       ]
+    },
+    "@std/fmt@1.0.3": {
+      "integrity": "97765c16aa32245ff4e2204ecf7d8562496a3cb8592340a80e7e554e0bb9149f"
     },
     "@std/internal@1.0.5": {
       "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
@@ -394,6 +398,7 @@
       },
       "dates": {
         "dependencies": [
+          "jsr:@std/fmt@^1.0.3",
           "npm:luxon@^3.5.0"
         ]
       },

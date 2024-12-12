@@ -1,4 +1,5 @@
 // load package
+import { format as stdFormat } from '@std/fmt/duration'
 import { DateTime } from 'luxon'
 
 const LOCAL_TIMEZONE = 'Europe/Amsterdam'
@@ -199,3 +200,22 @@ export const getDateHourMinutes = (date: DateTime): string =>
  * ```
  */
 export const getFullRelativeTime = (date: DateTime): string => `${getDateHourMinutes(date)} (${getRelative(date)})`
+
+/**
+ * Format a duration in milliseconds to a human readable string.
+ *
+ * @param {number} duration - the duration in milliseconds
+ * @returns {string} the formatted duration (e.g. `1m 39s`)
+ *
+ * @example
+ * ```ts
+ * import { formatDuration } from 'jsr:@frytg/dates'
+ *
+ * formatDuration(1000) // 1s
+ *
+ * const startTs = getMs()
+ * // do something...
+ * formatDuration(getMsOffset(startTs)) // time taken
+ * ```
+ */
+export const formatDuration = (duration: number): string => stdFormat(duration, { ignoreZero: true })
