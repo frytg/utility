@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 env:
-  JSR_DEPENDENCIES: "@cross/test @std/assert @frytg/logger"
+  JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger @frytg/dates"
   NPM_DEPENDENCIES: "luxon sinon"
 
 jobs:
