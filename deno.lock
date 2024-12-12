@@ -2,14 +2,14 @@
   "version": "4",
   "specifiers": {
     "jsr:@cross/runtime@1": "1.1.0",
-    "jsr:@cross/test@0.0.9": "0.0.9",
+    "jsr:@cross/test@^0.0.10": "0.0.10",
     "jsr:@frytg/logger@0.0.2": "0.0.2",
-    "jsr:@std/assert@~0.218.2": "0.218.2",
-    "jsr:@std/fmt@~0.218.2": "0.218.2",
+    "jsr:@std/assert@^1.0.9": "1.0.9",
+    "jsr:@std/internal@^1.0.5": "1.0.5",
     "npm:@biomejs/biome@1.9.4": "1.9.4",
     "npm:@biomejs/biome@^1.9.4": "1.9.4",
     "npm:@types/node@*": "22.5.4",
-    "npm:@types/node@^22.9.0": "22.9.0",
+    "npm:@types/node@^22.10.2": "22.10.2",
     "npm:luxon@^3.5.0": "3.5.0",
     "npm:winston@^3.17.0": "3.17.0"
   },
@@ -17,8 +17,8 @@
     "@cross/runtime@1.1.0": {
       "integrity": "f35a3b768a9de125277329483b684062ffc9ee86f4449cb8b3d614adcad64ffb"
     },
-    "@cross/test@0.0.9": {
-      "integrity": "2aa8237a96a2f8f51ccc8fec71135616d223bf4f38dd89ba4f863037c85ddc56",
+    "@cross/test@0.0.10": {
+      "integrity": "5f235cdd927d5551d692bc413458625552d299bc5471baf18180e4287cf4ac20",
       "dependencies": [
         "jsr:@cross/runtime"
       ]
@@ -29,14 +29,14 @@
         "npm:winston"
       ]
     },
-    "@std/assert@0.218.2": {
-      "integrity": "7f0a5a1a8cf86607cd6c2c030584096e1ffad27fc9271429a8cb48cfbdee5eaf",
+    "@std/assert@1.0.9": {
+      "integrity": "a9f0c611a869cc791b26f523eec54c7e187aab7932c2c8e8bea0622d13680dcd",
       "dependencies": [
-        "jsr:@std/fmt"
+        "jsr:@std/internal"
       ]
     },
-    "@std/fmt@0.218.2": {
-      "integrity": "99526449d2505aa758b6cbef81e7dd471d8b28ec0dcb1491d122b284c548788a"
+    "@std/internal@1.0.5": {
+      "integrity": "54a546004f769c1ac9e025abd15a76b6671ddc9687e2313b67376125650dc7ba"
     }
   },
   "npm": {
@@ -88,16 +88,16 @@
         "kuler"
       ]
     },
+    "@types/node@22.10.2": {
+      "integrity": "sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==",
+      "dependencies": [
+        "undici-types@6.20.0"
+      ]
+    },
     "@types/node@22.5.4": {
       "integrity": "sha512-FDuKUJQm/ju9fT/SeX/6+gBzoPzlVCzfzmGkwKvRHQVxi4BntVbyIwf6a4Xn62mrvndLiml6z/UBXIdEVjQLXg==",
       "dependencies": [
-        "undici-types"
-      ]
-    },
-    "@types/node@22.9.0": {
-      "integrity": "sha512-vuyHg81vvWA1Z1ELfvLko2c8f34gyA0zaic0+Rllc5lbCnbSyuvb2Oxpm6TAUAC/2xZN3QGqxBNggD1nNR2AfQ==",
-      "dependencies": [
-        "undici-types"
+        "undici-types@6.19.8"
       ]
     },
     "@types/triple-beam@1.3.5": {
@@ -218,6 +218,9 @@
     "undici-types@6.19.8": {
       "integrity": "sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw=="
     },
+    "undici-types@6.20.0": {
+      "integrity": "sha512-Ny6QZ2Nju20vw1SRHe3d9jVu6gJ+4e3+MMpqu7pqE5HT6WsTSlce++GQmK5UXS8mzV8DSYHrQH+Xrf2jVcuKNg=="
+    },
     "util-deprecate@1.0.2": {
       "integrity": "sha512-EPD5q1uXyFxJpCrLnCc1nHnq3gOa6DZBocAIiI2TaSCA7VCJ1UJDMagCzIkXNsUYfD1daK//LTEQ8xiIbrHtcw=="
     },
@@ -305,10 +308,10 @@
   },
   "workspace": {
     "dependencies": [
-      "jsr:@cross/test@0.0.9",
-      "jsr:@std/assert@~0.218.2",
+      "jsr:@cross/test@^0.0.10",
+      "jsr:@std/assert@^1.0.9",
       "npm:@biomejs/biome@^1.9.4",
-      "npm:@types/node@^22.9.0"
+      "npm:@types/node@^22.10.2"
     ],
     "members": {
       "check-required-env": {
