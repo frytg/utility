@@ -206,5 +206,16 @@ export const getFullRelativeTime = (date: DateTime): string => `${getDateHourMin
  *
  * @param {number} duration - the duration in milliseconds
  * @returns {string} the formatted duration (e.g. `1m 39s`)
+ *
+ * @example
+ * ```ts
+ * import { formatDuration } from 'jsr:@frytg/dates'
+ *
+ * formatDuration(1000) // 1s
+ *
+ * const startTs = getMs()
+ * // do something...
+ * formatDuration(getMsOffset(startTs)) // time taken
+ * ```
  */
 export const formatDuration = (duration: number) => stdFormat(duration, { ignoreZero: true })
