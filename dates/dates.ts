@@ -218,4 +218,4 @@ export const getFullRelativeTime = (date: DateTime): string => `${getDateHourMin
  * formatDuration(getMsOffset(startTs)) // time taken
  * ```
  */
-export const formatDuration = (duration: number) => stdFormat(duration, { ignoreZero: true })
+export const formatDuration = (duration: number): string => stdFormat(duration, { ignoreZero: true })
