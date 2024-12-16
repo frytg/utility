@@ -5,6 +5,7 @@
 
 This package provides functions to compute SHA-256 and SHA-512 hashes using [native Node crypto](https://nodejs.org/api/crypto.html).
 
+- [full docs on JSR](https://jsr.io/@frytg/crypto/doc)
 - [Hash (SHA-256 or SHA-512)](https://jsr.io/@frytg/crypto/doc/hash)
 - [HMAC (SHA-256 or SHA-512)](https://jsr.io/@frytg/crypto/doc/hmac)
 

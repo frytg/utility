@@ -1,5 +1,9 @@
 # Crypto Changelog
 
+## 2024-12-16 - 0.0.2
+
+- fix: optimize key handling for HMAC
+
 ## 2024-12-12 - 0.0.1
 
-- feat: added hash and hmac functions for SHA-256 and SHA-512
+- feat: added hash and HMAC functions for SHA-256 and SHA-512
