@@ -3,8 +3,8 @@
 	"name": "@frytg/crypto",
 	"version": "0.0.1",
 	"exports": {
-		"hash": "./hash.ts",
-		"hmac": "./hmac.ts"
+		"./hash": "./hash.ts",
+		"./hmac": "./hmac.ts"
 	},
 	"publish": {
 		"exclude": ["*.test.ts"]
