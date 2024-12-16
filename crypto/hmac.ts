@@ -1,13 +1,6 @@
-// load package
-import { Buffer } from 'node:buffer'
-import { createHmac } from 'node:crypto'
-
-const HEX_ENCODING = 'hex'
-const HEX_REGEX = /^[0-9a-fA-F]*$/
-
 /**
- * @module hmac
- * HMAC SHA-256 and SHA-512 hash functions
+ * @module
+ * {@linkcode hmacSha256 | HMAC SHA-256} and {@linkcode hmacSha512 | HMAC SHA-512} hash functions
  *
  * @example
  * ```ts
@@ -16,6 +9,13 @@ const HEX_REGEX = /^[0-9a-fA-F]*$/
  * hmacSha512('hello world', '0123456789abcdef')
  * ```
  */
+
+// load package
+import { Buffer } from 'node:buffer'
+import { createHmac } from 'node:crypto'
+
+const HEX_ENCODING = 'hex'
+const HEX_REGEX = /^[0-9a-fA-F]*$/
 
 /**
  * Returns a HMAC SHA-256 hash of the input string (as hexadecimal string)

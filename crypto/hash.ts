@@ -1,10 +1,6 @@
-import { createHash } from 'node:crypto'
-
-const HEX_ENCODING = 'hex'
-
 /**
- * @module hash
- * SHA-256 and SHA-512 hash functions
+ * @module
+ * {@linkcode hashSha256 | SHA-256} and {@linkcode hashSha512 | SHA-512} hash functions
  *
  * @example
  * ```ts
@@ -13,6 +9,10 @@ const HEX_ENCODING = 'hex'
  * hashSha512('hello world')
  * ```
  */
+
+import { createHash } from 'node:crypto'
+
+const HEX_ENCODING = 'hex'
 
 /**
  * Returns a SHA-256 hash of the input string (as hexadecimal string)

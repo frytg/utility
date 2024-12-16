@@ -1,5 +1,9 @@
 # Crypto Changelog
 
+## 2024-12-16 - 0.0.3
+
+- fix: optimize JSDoc for Deno
+
 ## 2024-12-16 - 0.0.2
 
 - fix: optimize key handling for HMAC
