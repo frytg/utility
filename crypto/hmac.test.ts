@@ -1,6 +1,6 @@
 import { Buffer } from 'node:buffer'
 import { test } from '@cross/test'
-import { assertEquals } from '@std/assert'
+import { assertEquals, assertThrows } from '@std/assert'
 
 import { bufferFromHex, hmacSha256, hmacSha512 } from './hmac.ts'
 
@@ -8,18 +8,18 @@ test('hmacSha256 - generates correct HMAC SHA-256 hashes', () => {
 	const testCases = [
 		{
 			input: 'hello',
-			key: 'secret',
-			expected: '88aab3ede8d3adf94d26ab90d3bafd4a2083070c3bcce9c014ee04a443847c0b',
+			key: '0123456789abcdef',
+			expected: '58341de110352e89a9dfe341aede35073e34b5640f006ed94208efa321d68994',
 		},
 		{
 			input: '',
-			key: 'secret',
-			expected: 'f9e66e179b6747ae54108f82f8ade8b3c25d76fd30afde6c395822c530196169',
+			key: '0123456789abcdef',
+			expected: 'f2f24bb00417d3d905c2fc9b659fbe5310af55be93eb00524fc2021e3cc29a88',
 		},
 		{
 			input: 'The quick brown fox jumps over the lazy dog',
-			key: 'secret',
-			expected: '54cd5b827c0ec938fa072a29b177469c843317b095591dc846767aa338bac600',
+			key: '0123456789abcdef',
+			expected: '5a4921e469387c921b75e6f135db948ab94a0ee5d28c8d8706df5df3c09a8095',
 		},
 	]
 
@@ -32,21 +32,21 @@ test('hmacSha512 - generates correct HMAC SHA-512 hashes', () => {
 	const testCases = [
 		{
 			input: 'hello',
-			key: 'secret',
+			key: '0123456789abcdef',
 			expected:
-				'db1595ae88a62fd151ec1cba81b98c39df82daae7b4cb9820f446d5bf02f1dcfca6683d88cab3e273f5963ab8ec469a746b5b19086371239f67d1e5f99a79440',
+				'e603296d6ec667b62905984498c87cee7c35625fac4517108d74ac169ab0a6727a65d4786cd11c3c0851b8505983714f58ee2156f32093e9360cb275539802e9',
 		},
 		{
 			input: '',
-			key: 'secret',
+			key: '0123456789abcdef',
 			expected:
-				'b0e9650c5faf9cd8ae02276671545424104589b3656731ec193b25d01b07561c27637c2d4d68389d6cf5007a8632c26ec89ba80a01c77a6cdd389ec28db43901',
+				'acae8450151bdbb810f41200da1bf26ef2756037bcdc930b014cbbc5fccb3b9ddc0cdcee6b05fa07d88e65af87d202e6dd8d0c5303a8a0866a2a5ce505779808',
 		},
 		{
 			input: 'The quick brown fox jumps over the lazy dog',
-			key: 'secret',
+			key: '0123456789abcdef',
 			expected:
-				'76af3588620ef6e2c244d5a360e080c0d649b6dd6b82ccd115eeefee8ff403bcee9aeb08618db9a2a94a9e80c7996bb2cb0c00f6e69de38ed8af2758ef39df0a',
+				'10e7297c19413a9129c9ac57779baa43b273198bce8b27b2e3e3e764c2792d430f46742bf57d1c9d8c6593e70c891d384472a508ac44a2ec92effff1ff850ba4',
 		},
 	]
 
@@ -73,5 +73,34 @@ test('bufferFromHex - converts hex strings to Buffer correctly', () => {
 
 	for (const { input, expected } of testCases) {
 		assertEquals(bufferFromHex(input), expected, `bufferFromHex("${input}") should return correct Buffer`)
+	}
+})
+
+test('bufferFromHex - validates hex strings correctly', () => {
+	// Valid hex strings should work
+	const validHexes = ['0123456789abcdef', 'ABCDEF', '', '00', 'ff', 'deadbeef']
+
+	for (const hex of validHexes) {
+		assertEquals(typeof bufferFromHex(hex), 'object', `bufferFromHex should accept valid hex string "${hex}"`)
+	}
+
+	// Invalid hex strings should throw
+	const invalidHexes = [
+		'0123456789abcdefg', // invalid hex char
+		'0123456789abcdef0', // odd length
+		'xyz', // non-hex chars
+		'gh', // non-hex chars
+		'   ', // whitespace
+		'12 34', // spaces
+		'12-34', // dashes
+	]
+
+	for (const hex of invalidHexes) {
+		assertThrows(
+			() => bufferFromHex(hex),
+			Error,
+			'Invalid hex string',
+			`bufferFromHex should reject invalid hex string "${hex}"`,
+		)
 	}
 })
