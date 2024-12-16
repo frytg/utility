@@ -67,7 +67,7 @@ const formatConfigLocal: Logform.Format = format.combine(
  *
  * @example basic log
  * ```ts
- * import { logger } from 'jsr:@frytg/logger'
+ * import { logger } from '@frytg/logger'
  *
  * logger.log({
  *   level: 'debug',

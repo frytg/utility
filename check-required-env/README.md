@@ -6,7 +6,7 @@
 Simply check if a certain required environment variable is set. If not, throw an error and exit the process.
 
 ```ts
-import { checkRequiredEnv } from 'jsr:@frytg/check-required-env';
+import { checkRequiredEnv } from '@frytg/check-required-env';
 
 checkRequiredEnv('MY_IMPORTANT_ENV_VAR');
 ```
