@@ -6,5 +6,8 @@
 	"imports": {
 		"@std/fmt": "jsr:@std/fmt@^1.0.3",
 		"luxon": "npm:luxon@^3.5.0"
+	},
+	"publish": {
+		"exclude": ["*.test.ts"]
 	}
 }

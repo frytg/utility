@@ -14,6 +14,18 @@ This repository is work in progress.
 - [`@frytg/dates`](./dates/README.md) - Date utilities around Luxon
 - [`@frytg/logger`](./logger/README.md) - Pre-configuredWinston logging wrapper
 
+## More Tooling
+
+Planned for this utility package:
+
+- `hashes` - sha256, sha512, etc.
+
+Other tools that I regularly use and don't feel the need to optimize or re-create in this utility package:
+
+- [`axios`](https://github.com/axios/axios) - _Promise based HTTP client for the browser and node.js_
+- [`hono`](https://jsr.io/@hono/hono) - _small, simple, and ultrafast web framework built on Web Standards_
+- [`undici`](https://github.com/nodejs/undici) - performant HTTP/1.1 client for Node.js
+
 ## Lint
 
 Use `deno fmt`, `deno lint` and `biome lint` to check the code.
@@ -42,13 +54,6 @@ deno publish --dry-run
 
 Then once everything is pushed or merged on `main`, run the GitHub actions workflow to publish the packages to JSR
 (see [_publishing packages_](https://jsr.io/docs/publishing-packages) for more details).
-
-## More Tooling
-
-Other tools that I regularly use and don't feel the need to optimize or re-create in this utility package:
-
-- [`axios`](https://github.com/axios/axios) - _Promise based HTTP client for the browser and node.js_
-- [`hono`](https://jsr.io/@hono/hono) - _small, simple, and ultrafast web framework built on Web Standards_
 
 ## Author
 
