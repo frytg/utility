@@ -10,7 +10,7 @@ import logger from '@frytg/logger'
  *
  * @example
  * ```ts
- * import { checkRequiredEnv } from 'jsr:@frytg/check-required-env'
+ * import { checkRequiredEnv } from '@frytg/check-required-env'
  *
  * checkRequiredEnv('MY_IMPORTANT_ENV_VAR')
  * ```

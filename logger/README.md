@@ -16,7 +16,7 @@ Debug logs will only be logged if the env `STAGE` is set to `dev`.
 ## Usage
 
 ```ts
-import logger from 'jsr:@frytg/logger';
+import logger from '@frytg/logger';
 ```
 
 ```ts
