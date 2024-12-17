@@ -11,6 +11,7 @@ This repository is work in progress.
 ## Tools
 
 - [`@frytg/check-required-env`](./check-required-env/README.md) - Check a required environment variable
+- [`@frytg/crypto`](./crypto/README.md) - Crypto utilities (hash, hmac, etc.)
 - [`@frytg/dates`](./dates/README.md) - Date utilities around Luxon
 - [`@frytg/logger`](./logger/README.md) - Pre-configuredWinston logging wrapper
 

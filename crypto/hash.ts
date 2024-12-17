@@ -10,6 +10,7 @@
  * ```
  */
 
+// load packages
 import { createHash } from 'node:crypto'
 
 const HEX_ENCODING = 'hex'

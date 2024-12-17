@@ -1,5 +1,9 @@
 # Crypto Changelog
 
+## 2024-12-17 - 0.1.0
+
+- feat: add `bufferFromBase64`
+
 ## 2024-12-16 - 0.0.3
 
 - fix: optimize JSDoc for Deno

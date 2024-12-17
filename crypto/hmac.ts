@@ -10,10 +10,12 @@
  * ```
  */
 
-// load package
+// load packages
 import { Buffer } from 'node:buffer'
 import { createHmac } from 'node:crypto'
 
+const BASE64_ENCODING = 'base64'
+const BASE64_REGEX = /^[0-9a-zA-Z+/=]*$/
 const HEX_ENCODING = 'hex'
 const HEX_REGEX = /^[0-9a-fA-F]*$/
 
@@ -51,6 +53,25 @@ export const hmacSha256 = (str: string | Buffer, key: string | Buffer): string =
 export const hmacSha512 = (str: string | Buffer, key: string | Buffer): string => {
 	const keyBuffer = typeof key === 'string' ? bufferFromHex(key) : key
 	return createHmac('sha512', keyBuffer).update(str).digest(HEX_ENCODING)
+}
+
+/**
+ * Converts a base64 string to a Buffer for use with HMAC
+ * @param base64 - The base64 string to convert
+ * @returns Buffer
+ *
+ * @example
+ * ```ts
+ * import { hmacSha512, bufferFromBase64 } from '@frytg/crypto/hmac'
+ *
+ * hmacSha512('hello world', bufferFromBase64('MDEyMzQ1Njc4OWFiY2RlZg=='))
+ * ```
+ */
+export const bufferFromBase64 = (base64: string): Buffer => {
+	// check if base64 string is valid
+	if (!BASE64_REGEX.test(base64)) throw new Error('Invalid base64 string')
+
+	return Buffer.from(base64, BASE64_ENCODING)
 }
 
 /**
