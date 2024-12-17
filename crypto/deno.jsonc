@@ -1,10 +1,12 @@
 {
 	"$schema": "https://jsr.io/schema/config-file.v1.json",
 	"name": "@frytg/crypto",
-	"version": "0.0.3",
+	"version": "0.1.0",
 	"exports": {
 		"./hash": "./hash.ts",
-		"./hmac": "./hmac.ts"
+		"./hmac": "./hmac.ts",
+		"./generate-default-keys": "./generate-default-keys.ts",
+		"./generate-key": "./generate-key.ts"
 	},
 	"publish": {
 		"exclude": ["*.test.ts"]
