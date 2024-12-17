@@ -17,8 +17,8 @@ permissions:
   contents: read
 
 env:
-  JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger"
-  NPM_DEPENDENCIES: "luxon sinon"
+  # JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger @frytg/check-required-env"
+  # NPM_DEPENDENCIES: "luxon minio sinon"
 
 jobs:
   test-on-deno-and-lint:
@@ -78,6 +78,14 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v4
 
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: canary
+
+      - name: Install dependencies
+        run: deno install --vendor
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
@@ -86,11 +94,11 @@ jobs:
       - name: Bun version
         run: bun --version
 
-      - name: Install JSR dependencies
-        run: bunx jsr add ${{ env.JSR_DEPENDENCIES }}
+      #- name: Install JSR dependencies
+      #  run: bunx jsr add ${{ env.JSR_DEPENDENCIES }}
 
-      - name: Install NPM dependencies
-        run: bun add ${{ env.NPM_DEPENDENCIES }}
+      #- name: Install NPM dependencies
+      #  run: bun add ${{ env.NPM_DEPENDENCIES }}
 
       - name: Test
         run: bun test
@@ -121,14 +129,22 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
 
+      - name: Set up Deno
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: canary
+
+      - name: Install dependencies
+        run: deno install --vendor
+
       - name: Node version
         run: node --version
 
-      - name: Install JSR dependencies
-        run: npx jsr add ${{ env.JSR_DEPENDENCIES }}
+      #- name: Install JSR dependencies
+      #  run: npx jsr add ${{ env.JSR_DEPENDENCIES }}
 
-      - name: Install NPM dependencies
-        run: npm install ${{ env.NPM_DEPENDENCIES }}
+      #- name: Install NPM dependencies
+      #  run: npm install ${{ env.NPM_DEPENDENCIES }}
 
       - name: Set up package.json
         run: 'echo ''{ "type": "module" }'' > package.json'
