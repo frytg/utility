@@ -21,9 +21,9 @@ const HEX_REGEX = /^[0-9a-fA-F]*$/
 
 /**
  * Returns a HMAC SHA-256 hash of the input string (as hexadecimal string)
- * @param str - The string to hash
- * @param key - The key to use for the HMAC, when a string is provided, it will be converted to a Buffer
- * @returns HMAC SHA-256 hash of the input string (hexadecimal)
+ * @param {string | Buffer} str - The string to hash
+ * @param {string | Buffer} key - The key to use for the HMAC, when a string is provided, it will be converted to a Buffer
+ * @returns {string} HMAC SHA-256 hash of the input string (hexadecimal)
  *
  * @example
  * ```ts
@@ -39,9 +39,9 @@ export const hmacSha256 = (str: string | Buffer, key: string | Buffer): string =
 
 /**
  * Returns a HMAC SHA-512 hash of the input string (as hexadecimal string)
- * @param str - The string to hash
- * @param key - The key to use for the HMAC, when a string is provided, it will be converted to a Buffer
- * @returns HMAC SHA-512 hash of the input string (hexadecimal)
+ * @param {string | Buffer} str - The string to hash
+ * @param {string | Buffer} key - The key to use for the HMAC, when a string is provided, it will be converted to a Buffer
+ * @returns {string} HMAC SHA-512 hash of the input string (hexadecimal)
  *
  * @example
  * ```ts
@@ -57,8 +57,8 @@ export const hmacSha512 = (str: string | Buffer, key: string | Buffer): string =
 
 /**
  * Converts a base64 string to a Buffer for use with HMAC
- * @param base64 - The base64 string to convert
- * @returns Buffer
+ * @param {string} base64 - The base64 string to convert
+ * @returns {Buffer}
  *
  * @example
  * ```ts
@@ -76,8 +76,8 @@ export const bufferFromBase64 = (base64: string): Buffer => {
 
 /**
  * Converts a hexadecimal string to a Buffer for use with HMAC
- * @param hex - The hexadecimal string to convert
- * @returns Buffer
+ * @param {string} hex - The hexadecimal string to convert
+ * @returns {Buffer}
  *
  * @example
  * ```ts

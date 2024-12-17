@@ -17,8 +17,8 @@ const HEX_ENCODING = 'hex'
 
 /**
  * Returns a SHA-256 hash of the input string (as hexadecimal string)
- * @param str - The string to hash
- * @returns SHA-256 hash of the input string (hexadecimal)
+ * @param {string} str - The string to hash
+ * @returns {string} SHA-256 hash of the input string (hexadecimal)
  *
  * @example SHA-256
  * ```ts
@@ -31,8 +31,8 @@ export const hashSha256 = (str: string): string => createHash('sha256').update(s
 
 /**
  * Returns a SHA-512 hash of the input string (as hexadecimal string)
- * @param str - The string to hash
- * @returns SHA-512 hash of the input string (hexadecimal)
+ * @param {string} str - The string to hash
+ * @returns {string} SHA-512 hash of the input string (hexadecimal)
  *
  * @example SHA-512
  * ```ts
