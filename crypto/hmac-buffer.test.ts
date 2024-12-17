@@ -31,7 +31,7 @@ test('bufferFromBase64 - converts base64 strings to Buffer correctly', () => {
 	}
 })
 
-test('bufferFromBase64 - validates base64 strings correctly', () => {
+test('bufferFromBase64 - validates valid base64 strings correctly', () => {
 	// Valid base64 strings should work
 	const validBase64 = [
 		'aGVsbG8=', // normal case
@@ -46,10 +46,12 @@ test('bufferFromBase64 - validates base64 strings correctly', () => {
 		assertEquals(
 			typeof bufferFromBase64(base64),
 			'object',
-			`bufferFromBase64 should accept valid base64 string "${base64}"`,
+			`bufferFromBase64 should accept valid base64 string "${base64}".`,
 		)
 	}
+})
 
+test('bufferFromBase64 - validates invalid base64 strings correctly', () => {
 	// Invalid base64 strings should throw
 	const invalidBase64 = [
 		'!@#$', // invalid characters
@@ -62,7 +64,7 @@ test('bufferFromBase64 - validates base64 strings correctly', () => {
 			() => bufferFromBase64(base64),
 			Error,
 			'base64', // error message should include
-			`bufferFromBase64 should reject invalid base64 string "${base64}"`,
+			`bufferFromBase64 should reject invalid base64 string "${base64}".`,
 		)
 	}
 })

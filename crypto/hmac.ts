@@ -11,10 +11,9 @@
  */
 
 // load packages
-import { Buffer } from 'node:buffer'
+import { Buffer, atob } from 'node:buffer'
 import { createHmac } from 'node:crypto'
 
-const BASE64_ENCODING = 'base64'
 const BASE64_REGEX = /^[0-9a-zA-Z+/=]*$/
 const HEX_ENCODING = 'hex'
 const HEX_REGEX = /^[0-9a-fA-F]*$/
@@ -67,11 +66,18 @@ export const hmacSha512 = (str: string | Buffer, key: string | Buffer): string =
  * hmacSha512('hello world', bufferFromBase64('MDEyMzQ1Njc4OWFiY2RlZg=='))
  * ```
  */
-export const bufferFromBase64 = (base64: string): Buffer => {
+export const bufferFromBase64 = (base64: string, preferNativeError = false): Buffer => {
 	// check if base64 string is valid
-	if (!BASE64_REGEX.test(base64)) throw new Error('Invalid base64 string')
+	if (!BASE64_REGEX.test(base64)) throw new Error('Invalid base64 characters')
 
-	return Buffer.from(base64, BASE64_ENCODING)
+	try {
+		// we're using atob because Buffer.from(base64, 'base64') throws unhandled rejections on some systems
+		return Buffer.from(atob(base64))
+	} catch (error) {
+		// the native error varies between runtimes, so the default is to throw our own error
+		if (preferNativeError) throw error
+		throw new Error('Invalid base64 string')
+	}
 }
 
 /**
