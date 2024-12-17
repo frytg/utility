@@ -11,6 +11,7 @@
  */
 
 // load packages
+// deno-fmt-ignore
 import { Buffer, atob } from 'node:buffer'
 import { createHmac } from 'node:crypto'
 

@@ -90,14 +90,16 @@ test('bufferFromHex - converts hex strings to Buffer correctly', () => {
 	}
 })
 
-test('bufferFromHex - validates hex strings correctly', () => {
+test('bufferFromHex - validates valid hex strings correctly', () => {
 	// Valid hex strings should work
 	const validHexes = ['0123456789abcdef', 'ABCDEF', '', '00', 'ff', 'deadbeef']
 
 	for (const hex of validHexes) {
 		assertEquals(typeof bufferFromHex(hex), 'object', `bufferFromHex should accept valid hex string "${hex}"`)
 	}
+})
 
+test('bufferFromHex - validates invalid hex strings correctly', () => {
 	// Invalid hex strings should throw
 	const invalidHexes = [
 		'0123456789abcdefg', // invalid hex char
