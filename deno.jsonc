@@ -30,7 +30,7 @@
 		},
 		"exclude": ["**/*.md", "**/*.yml", "**/*.yaml"]
 	},
-	"workspace": ["./check-required-env", "./crypto", "./dates", "./logger", "./storage-s3"],
+	"workspace": ["./check-required-env", "./crypto", "./dates", "./logger"],
 	"imports": {
 		"@biomejs/biome": "npm:@biomejs/biome@^1.9.4",
 		"@types/node": "npm:@types/node@^22.10.2",

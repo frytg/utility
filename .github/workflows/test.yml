@@ -16,9 +16,9 @@ on:
 permissions:
   contents: read
 
-env:
-  # JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger @frytg/check-required-env"
-  # NPM_DEPENDENCIES: "luxon minio sinon"
+# env:
+# JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger @frytg/check-required-env"
+# NPM_DEPENDENCIES: "luxon minio sinon"
 
 jobs:
   test-on-deno-and-lint:
