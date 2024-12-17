@@ -1,16 +1,12 @@
 // load packages
-import process from 'node:process'
-import { checkRequiredEnv } from '@frytg/check-required-env'
-import * as Minio from 'minio'
+import { getRequiredEnv } from '@frytg/check-required-env/get'
+// @deno-types="minio/dist/esm/minio.d.mts"
+import { Client } from 'minio'
 
-// check for env
-checkRequiredEnv('S3_ENDPOINT')
-checkRequiredEnv('MY_SCW_ACCESS_KEY')
-checkRequiredEnv('MY_SCW_SECRET_KEY')
-
-export const minioClient = new Minio.Client({
+// create a minio client
+export const minioClient = new Client({
 	useSSL: true,
-	endPoint: process.env.S3_ENDPOINT,
-	accessKey: process.env.MY_SCW_ACCESS_KEY,
-	secretKey: process.env.MY_SCW_SECRET_KEY,
+	endPoint: getRequiredEnv('S3_ENDPOINT', false),
+	accessKey: getRequiredEnv('MY_SCW_ACCESS_KEY', false),
+	secretKey: getRequiredEnv('MY_SCW_SECRET_KEY', false),
 })
