@@ -5,8 +5,8 @@ import logger from '@frytg/logger'
 /**
  * Check if an environment variable is required and log an alert and exit if it is not set.
  *
- * @param name - The name of the environment variable.
- * @returns void
+ * @param {string} name - The name of the environment variable.
+ * @returns {void}
  *
  * @example
  * ```ts

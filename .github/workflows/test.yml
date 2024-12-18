@@ -17,8 +17,9 @@ permissions:
   contents: read
 
 env:
+  NODE_ENV: production
   JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger"
-  NPM_DEPENDENCIES: "luxon sinon"
+  NPM_DEPENDENCIES: "luxon minio sinon"
 
 jobs:
   test-on-deno-and-lint:
