@@ -13,12 +13,16 @@ import { getObject } from '@frytg/storage-s3';
 const object = await getObject('path/to/object.json', { parseJson: true });
 ```
 
+The MinIO client will be initialized with the required environment variables `STORE_S3_ENDPOINT`, `STORE_S3_ACCESS_KEY`, and `STORE_S3_SECRET_KEY`.
+
 ## Methods
 
 - [getObject](https://jsr.io/@frytg/storage-s3/doc/~/getObject)
 - [uploadObject](https://jsr.io/@frytg/storage-s3/doc/~/uploadObject)
 - [objectExists](https://jsr.io/@frytg/storage-s3/doc/~/objectExists)
 - [listObjects](https://jsr.io/@frytg/storage-s3/doc/~/listObjects)
+
+Also see all options in the [MinIO API documentation](https://min.io/docs/minio/linux/developers/javascript/API.html). They can be used by importing the `client` object.
 
 ## Author
 

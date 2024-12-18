@@ -1,11 +1,14 @@
 /**
  * Storage module for S3 with common operations using MinIO.
+ *
  * @module
+ *
+ * @see https://min.io/docs/minio/linux/developers/javascript/API.html
  */
 
 // import packages
 import { Buffer } from 'node:buffer'
-import type { BucketItem, BucketItemStat, BucketStream, Client } from 'minio/dist/esm/minio.d.mts'
+import type { BucketItem, BucketItemStat, BucketStream, Client as ClientType } from 'minio/dist/esm/minio.d.mts'
 
 // load utils
 import { minioClient } from './s3.ts'
@@ -13,8 +16,17 @@ import { minioClient } from './s3.ts'
 /**
  * The MinIO client.
  * @type {Client}
+ *
+ * @see https://min.io/docs/minio/linux/developers/javascript/API.html
+ *
+ * @example Remove an object
+ * ```ts
+ * import { Client as minioClient } from '@frytg/storage-s3'
+ *
+ * await minioClient.removeObject('mybucket', 'photo.jpg')
+ * ```
  */
-export const client: Client = minioClient
+export const Client: ClientType = minioClient
 
 /**
  * Retrieves an object from S3.
