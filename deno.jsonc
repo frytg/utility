@@ -16,6 +16,7 @@
 	},
 	"tasks": {
 		"check": "deno fmt --check && deno lint && biome lint",
+		"dry-run": "deno publish --dry-run",
 		"test": "deno test --allow-sys --allow-env --clean --coverage"
 	},
 	"lint": {

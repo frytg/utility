@@ -6,8 +6,7 @@
 // import packages
 import { Buffer } from 'node:buffer'
 import { getRequiredEnv } from '@frytg/check-required-env/get'
-// @deno-types="minio/dist/esm/minio.d.mts"
-import type { BucketItem, BucketItemStat, BucketStream, Client } from 'minio'
+import type { BucketItem, BucketItemStat, BucketStream, Client } from 'minio/dist/esm/minio.d.mts'
 
 // load utils
 import { minioClient } from './s3.ts'
