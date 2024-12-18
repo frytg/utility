@@ -16,8 +16,8 @@ on:
 permissions:
   contents: read
 
-# env:
-# JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger @frytg/check-required-env"
+env:
+  JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger @frytg/check-required-env"
 # NPM_DEPENDENCIES: "luxon minio sinon"
 
 jobs:
@@ -94,8 +94,8 @@ jobs:
       - name: Bun version
         run: bun --version
 
-      #- name: Install JSR dependencies
-      #  run: bunx jsr add ${{ env.JSR_DEPENDENCIES }}
+      - name: Install JSR dependencies
+        run: bunx jsr add ${{ env.JSR_DEPENDENCIES }}
 
       #- name: Install NPM dependencies
       #  run: bun add ${{ env.NPM_DEPENDENCIES }}
@@ -140,8 +140,8 @@ jobs:
       - name: Node version
         run: node --version
 
-      #- name: Install JSR dependencies
-      #  run: npx jsr add ${{ env.JSR_DEPENDENCIES }}
+      - name: Install JSR dependencies
+        run: npx jsr add ${{ env.JSR_DEPENDENCIES }}
 
       #- name: Install NPM dependencies
       #  run: npm install ${{ env.NPM_DEPENDENCIES }}
