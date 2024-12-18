@@ -9,9 +9,9 @@ import sinon from 'sinon'
 test('s3 - exports a Minio.Client instance', async () => {
 	// Setup
 	const envStub = sinon.stub(process, 'env').value({
-		S3_ENDPOINT: 'test-endpoint',
-		MY_SCW_ACCESS_KEY: 'test-access-key',
-		MY_SCW_SECRET_KEY: 'test-secret-key',
+		STORE_S3_ENDPOINT: 'test-endpoint',
+		STORE_S3_ACCESS_KEY: 'test-access-key',
+		STORE_S3_SECRET_KEY: 'test-secret-key',
 	})
 
 	// load module with stubbed env

@@ -18,7 +18,7 @@ permissions:
 
 env:
   NODE_ENV: production
-  JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger @frytg/check-required-env"
+  JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger"
 # NPM_DEPENDENCIES: "luxon minio sinon"
 
 jobs:
