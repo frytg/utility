@@ -77,6 +77,20 @@ export const getObject = (
  * @returns {Promise<void>}
  *
  * @see https://min.io/docs/minio/linux/developers/javascript/API.html#putObject
+ *
+ * @example JSON
+ * ```ts
+ * import { uploadObject } from '@frytg/storage-s3'
+ *
+ * await uploadObject('path/to/object.json', { foo: 'bar' })
+ * ```
+ *
+ * @example Buffer
+ * ```ts
+ * import { uploadObject } from '@frytg/storage-s3'
+ *
+ * await uploadObject('path/to/object.blob', Buffer.from('foo'))
+ * ```
  */
 export const uploadObject = async (
 	path: string,
@@ -105,6 +119,14 @@ export const uploadObject = async (
  * @returns {Promise<BucketItemStat | false>}
  *
  * @see https://min.io/docs/minio/linux/developers/javascript/API.html#statObject
+ *
+ * @example
+ * ```ts
+ * import { objectExists } from '@frytg/storage-s3'
+ *
+ * const exists = await objectExists('path/to/object.json')
+ * console.log(exists) // null if it doesn't exist, otherwise the object stat
+ * ```
  */
 export const objectExists = async (
 	path: string,
@@ -113,13 +135,13 @@ export const objectExists = async (
 	}: {
 		bucketName?: string
 	},
-): Promise<BucketItemStat | Promise<false>> => {
+): Promise<BucketItemStat | Promise<null>> => {
 	try {
 		// explicitly awaiting the result to avoid unhandled promise rejection
 		const result: BucketItemStat = await minioClient.statObject(bucketName, path)
 		return result
 	} catch (_error) {
-		return false
+		return null
 	}
 }
 
@@ -141,6 +163,22 @@ const readableStreamForListObjects = (stream: BucketStream<BucketItem>): Promise
  * @returns {Promise<BucketItem[]>}
  *
  * @see https://min.io/docs/minio/linux/developers/javascript/API.html#listObjectsV2
+ *
+ * @example
+ * ```ts
+ * import { listObjects } from '@frytg/storage-s3'
+ *
+ * const objects = await listObjects('path/to/prefix')
+ * console.log(objects)
+ * ```
+ *
+ * @example Recursive
+ * ```ts
+ * import { listObjects } from '@frytg/storage-s3'
+ *
+ * const objects = await listObjects('path/to/prefix', { recursive: true })
+ * console.log(objects)
+ * ```
  */
 export const listObjects = async (
 	prefix: string,
