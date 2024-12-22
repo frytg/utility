@@ -1,12 +1,21 @@
 // load package
 import { format as stdFormat } from '@std/fmt/duration'
+// @deno-types="npm:@types/luxon@^3.4.2"
 import { DateTime } from 'luxon'
 
 const LOCAL_TIMEZONE = 'Europe/Amsterdam'
 const DATE_HOUR_MINUTES_FORMAT = 'ccc, d. LLLL yyyy - h:mma'
 
 /**
- * Luxon DateTime
+ * Export DateTime from Luxon
+ * @returns {DateTime} DateTime
+ *
+ * @example
+ * ```ts
+ * import { DateTime } from '@frytg/dates'
+ *
+ * DateTime.fromMillis(1719859200000)
+ * ```
  */
 export { DateTime }
 
@@ -17,7 +26,7 @@ export { DateTime }
  *
  * @example
  * ```ts
- * import { toLocal } from 'jsr:@frytg/dates'
+ * import { toLocal } from '@frytg/dates'
  *
  * toLocal(getNow())
  * ```
@@ -31,7 +40,7 @@ export const toLocal = (date: DateTime): DateTime => date.setZone(LOCAL_TIMEZONE
  *
  * @example
  * ```ts
- * import { msToUnix } from 'jsr:@frytg/dates'
+ * import { msToUnix } from '@frytg/dates'
  *
  * msToUnix(getMs())
  * ```
@@ -44,7 +53,7 @@ export const msToUnix = (ms: number): number => Number.parseInt(`${ms / 1000}`)
  *
  * @example
  * ```ts
- * import { getNow } from 'jsr:@frytg/dates'
+ * import { getNow } from '@frytg/dates'
  *
  * getNow()
  * ```
@@ -52,49 +61,56 @@ export const msToUnix = (ms: number): number => Number.parseInt(`${ms / 1000}`)
 export const getNow = (): DateTime => DateTime.now()
 
 /**
- * Provides util to get .unix() style value
+ * Get unix timestamp
  * @param {DateTime} [date] - date object
  * @returns {number} unix timestamp
  *
  * @example
  * ```ts
- * import { getUnix } from 'jsr:@frytg/dates'
+ * import { getUnix } from '@frytg/dates'
  *
  * getUnix()
  * getUnix(getNow())
  * ```
  */
-export const getUnix = (date?: DateTime): number => msToUnix((date || getNow()).valueOf())
+export const getUnix = (date?: DateTime): number => msToUnix(getDateTime(date).valueOf())
 
 /**
- * Provides util to get ms timestamp
+ * Get ms (milliseconds) timestamp
  * @param {DateTime} [date] - date object
  * @returns {number} ms timestamp
  *
  * @example
  * ```ts
- * import { getMs } from 'jsr:@frytg/dates'
+ * import { getMs } from '@frytg/dates'
  *
  * getMs()
  * getMs(getNow())
  * ```
  */
-export const getMs = (date?: DateTime): number => (date || getNow()).valueOf()
+export const getMs = (date?: DateTime): number => getDateTime(date).valueOf()
 
 /**
- * Provides util to get ISO string in UTC timezone
+ * Internal util to get DateTime object
+ * @param {DateTime} [date] - date object
+ * @returns {DateTime} DateTime object
+ */
+const getDateTime = (date?: DateTime): DateTime => (date instanceof DateTime ? date : getNow())
+
+/**
+ * Get ISO string in UTC timezone
  * @param {DateTime} [date] - date object
  * @returns {string} ISO string
  *
  * @example
  * ```ts
- * import { getISO } from 'jsr:@frytg/dates'
+ * import { getISO } from '@frytg/dates'
  *
  * getISO()
  * getISO(getNow())
  * ```
  */
-export const getISO = (date?: DateTime): string => (date || getNow()).toUTC().toISO()
+export const getISO = (date?: DateTime): string | null => getDateTime(date).toUTC().toISO()
 
 /**
  * Get ISO string (alias for {@link getISO})
@@ -110,7 +126,7 @@ export const getIso = getISO
  *
  * @example
  * ```ts
- * import { getMsOffset } from 'jsr:@frytg/dates'
+ * import { getMsOffset } from '@frytg/dates'
  *
  * getMsOffset(getMs())
  * ```
@@ -125,13 +141,13 @@ export const getMsOffset = (ms: number): number => getMs() - ms
  *
  * @example
  * ```ts
- * import { getRelative } from 'jsr:@frytg/dates'
+ * import { getRelative } from '@frytg/dates'
  *
  * getRelative(getNow())
  * getRelative(getNow(), 'nl-NL')
  * ```
  */
-export const getRelative = (date: DateTime, locale = 'en-US'): string => date.toRelative({ locale })
+export const getRelative = (date: DateTime, locale = 'en-US'): string | null => date.toRelative({ locale })
 
 /**
  * Get year-month-day (YYYYMMDD or YYYY-MM-DD)
@@ -141,14 +157,14 @@ export const getRelative = (date: DateTime, locale = 'en-US'): string => date.to
  *
  * @example
  * ```ts
- * import { getYearMonthDay } from 'jsr:@frytg/dates'
+ * import { getYearMonthDay } from '@frytg/dates'
  *
  * getYearMonthDay(getNow()) // YYYYMMDD
  * getYearMonthDay(getNow(), true) // YYYY-MM-DD
  * ```
  */
 export const getYearMonthDay = (date?: DateTime, withDashes = false): string | number =>
-	withDashes ? (date || getNow()).toFormat('yyyy-LL-dd') : Number.parseInt((date || getNow()).toFormat('yyyyLLdd'))
+	withDashes ? getDateTime(date).toFormat('yyyy-LL-dd') : Number.parseInt(getDateTime(date).toFormat('yyyyLLdd'))
 
 /**
  * Parse ISO string
@@ -157,7 +173,7 @@ export const getYearMonthDay = (date?: DateTime, withDashes = false): string | n
  *
  * @example
  * ```ts
- * import { parseISO } from 'jsr:@frytg/dates'
+ * import { parseISO } from '@frytg/dates'
  *
  * parseISO(getISO())
  * parseISO('2024-11-23T10:00:00.000Z')
@@ -179,7 +195,7 @@ export const parseIso = parseISO
  *
  * @example
  * ```ts
- * import { getDateHourMinutes } from 'jsr:@frytg/dates'
+ * import { getDateHourMinutes } from '@frytg/dates'
  *
  * getDateHourMinutes(getNow())
  * ```
@@ -194,7 +210,7 @@ export const getDateHourMinutes = (date: DateTime): string =>
  *
  * @example
  * ```ts
- * import { getFullRelativeTime } from 'jsr:@frytg/dates'
+ * import { getFullRelativeTime } from '@frytg/dates'
  *
  * getFullRelativeTime(getNow())
  * ```
@@ -209,7 +225,7 @@ export const getFullRelativeTime = (date: DateTime): string => `${getDateHourMin
  *
  * @example
  * ```ts
- * import { formatDuration } from 'jsr:@frytg/dates'
+ * import { formatDuration } from '@frytg/dates'
  *
  * formatDuration(1000) // 1s
  *

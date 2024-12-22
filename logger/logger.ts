@@ -1,6 +1,7 @@
 /**
- * @module
  * A pre-configured logger that is ready to use with syslog levels.
+ *
+ * @module
  */
 
 // load packages

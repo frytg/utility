@@ -1,7 +1,5 @@
 // deno-lint-ignore-file no-console
 /**
- * @module
- *
  * This module provides a function to generate a key of the specified number of bytes and print the key in base64 and hex to the console or return the key as a Buffer.
  *
  * @example
@@ -10,6 +8,8 @@
  *
  * generateKey(32, true)
  * ```
+ *
+ * @module
  */
 
 // load packages

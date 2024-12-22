@@ -2,8 +2,6 @@
  * Storage module for S3 with common operations using MinIO.
  *
  * @module
- *
- * @see https://min.io/docs/minio/linux/developers/javascript/API.html
  */
 
 // import packages

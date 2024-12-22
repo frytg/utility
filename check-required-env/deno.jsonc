@@ -8,5 +8,8 @@
 	},
 	"imports": {
 		"@frytg/logger": "jsr:@frytg/logger@0.0.2"
+	},
+	"publish": {
+		"exclude": ["*.test.ts"]
 	}
 }

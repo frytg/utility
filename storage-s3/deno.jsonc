@@ -4,6 +4,9 @@
 	"version": "0.0.1",
 	"exports": "./storage.ts",
 	"imports": {
-		"minio": "npm:minio@^8.0.2"
+		"minio": "npm:minio@^8.0.3"
+	},
+	"publish": {
+		"exclude": ["*.test.ts"]
 	}
 }
