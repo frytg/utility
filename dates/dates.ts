@@ -1,6 +1,6 @@
 // load package
 import { format as stdFormat } from '@std/fmt/duration'
-// @deno-types="npm:@types/luxon"
+// @deno-types="npm:@types/luxon@^3.4.2"
 import { DateTime } from 'luxon'
 
 const LOCAL_TIMEZONE = 'Europe/Amsterdam'
