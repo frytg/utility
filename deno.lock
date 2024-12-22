@@ -9,6 +9,7 @@
     "jsr:@std/internal@^1.0.5": "1.0.5",
     "npm:@biomejs/biome@1.9.4": "1.9.4",
     "npm:@biomejs/biome@^1.9.4": "1.9.4",
+    "npm:@types/luxon@*": "3.4.2",
     "npm:@types/luxon@^3.4.2": "3.4.2",
     "npm:@types/node@*": "22.5.4",
     "npm:@types/node@^22.10.2": "22.10.2",

@@ -73,7 +73,7 @@ export const getNow = (): DateTime => DateTime.now()
  * getUnix(getNow())
  * ```
  */
-export const getUnix = (date?: DateTime): number => msToUnix((date || getNow()).valueOf())
+export const getUnix = (date?: DateTime): number => msToUnix(getDateTime(date).valueOf())
 
 /**
  * Get ms (milliseconds) timestamp
@@ -88,7 +88,14 @@ export const getUnix = (date?: DateTime): number => msToUnix((date || getNow()).
  * getMs(getNow())
  * ```
  */
-export const getMs = (date?: DateTime): number => (date || getNow()).valueOf()
+export const getMs = (date?: DateTime): number => getDateTime(date).valueOf()
+
+/**
+ * Internal util to get DateTime object
+ * @param {DateTime} [date] - date object
+ * @returns {DateTime} DateTime object
+ */
+const getDateTime = (date?: DateTime): DateTime => (date instanceof DateTime ? date : getNow())
 
 /**
  * Get ISO string in UTC timezone
@@ -103,7 +110,7 @@ export const getMs = (date?: DateTime): number => (date || getNow()).valueOf()
  * getISO(getNow())
  * ```
  */
-export const getISO = (date?: DateTime): string => (date || getNow()).toUTC().toISO()
+export const getISO = (date?: DateTime): string | null => getDateTime(date).toUTC().toISO()
 
 /**
  * Get ISO string (alias for {@link getISO})
@@ -140,7 +147,7 @@ export const getMsOffset = (ms: number): number => getMs() - ms
  * getRelative(getNow(), 'nl-NL')
  * ```
  */
-export const getRelative = (date: DateTime, locale = 'en-US'): string => date.toRelative({ locale })
+export const getRelative = (date: DateTime, locale = 'en-US'): string | null => date.toRelative({ locale })
 
 /**
  * Get year-month-day (YYYYMMDD or YYYY-MM-DD)
@@ -157,7 +164,7 @@ export const getRelative = (date: DateTime, locale = 'en-US'): string => date.to
  * ```
  */
 export const getYearMonthDay = (date?: DateTime, withDashes = false): string | number =>
-	withDashes ? (date || getNow()).toFormat('yyyy-LL-dd') : Number.parseInt((date || getNow()).toFormat('yyyyLLdd'))
+	withDashes ? getDateTime(date).toFormat('yyyy-LL-dd') : Number.parseInt(getDateTime(date).toFormat('yyyyLLdd'))
 
 /**
  * Parse ISO string

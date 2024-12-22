@@ -4,6 +4,7 @@
 
 - fix: added `@deno-types` to `DateTime` import
 - fix: removed `jsr:` prefix from ts examples
+- fix: type errors for dates
 
 ## 2024-12-12 - 0.1.0
 
