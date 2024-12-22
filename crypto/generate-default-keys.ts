@@ -1,11 +1,12 @@
 /**
- * @module
  * Run key generation for default key sizes and print the results to the console
  *
  * @example
  * ```bash
  * deno run jsr:@frytg/crypto/generate-default-keys
  * ```
+ *
+ * @module
  */
 
 // load module

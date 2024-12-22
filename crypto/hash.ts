@@ -1,13 +1,14 @@
 /**
- * @module
  * {@linkcode hashSha256 | SHA-256} and {@linkcode hashSha512 | SHA-512} hash functions
  *
- * @example
+ * @example Hash SHA-256
  * ```ts
  * import { hashSha512 } from '@frytg/crypto/hash'
  *
  * hashSha512('hello world')
  * ```
+ *
+ * @module
  */
 
 // load packages

@@ -5,6 +5,12 @@
 
 This is a simple opinionated wrapper around the [Luxon](https://github.com/moment/luxon) library to provide pre-configured helpers.
 
+```ts
+import { getISO } from '@frytg/dates';
+
+getISO(); // returns string like 2025-01-01T00:00:00.000Z
+```
+
 ## Author
 
 Created by [@frytg](https://github.com/frytg) / [frytg.digital](https://www.frytg.digital)

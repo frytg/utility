@@ -1,13 +1,14 @@
 /**
- * @module
  * {@linkcode hmacSha256 | HMAC SHA-256} and {@linkcode hmacSha512 | HMAC SHA-512} hash functions
  *
- * @example
+ * @example HMAC SHA-512
  * ```ts
  * import { hmacSha512 } from '@frytg/crypto/hmac'
  *
  * hmacSha512('hello world', '0123456789abcdef')
  * ```
+ *
+ * @module
  */
 
 // load packages
