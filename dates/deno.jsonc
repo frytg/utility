@@ -5,6 +5,7 @@
 	"exports": "./dates.ts",
 	"imports": {
 		"@std/fmt": "jsr:@std/fmt@^1.0.3",
+		"@types/luxon": "npm:@types/luxon@^3.4.2",
 		"luxon": "npm:luxon@^3.5.0"
 	},
 	"publish": {

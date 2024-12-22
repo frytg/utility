@@ -36,7 +36,7 @@
 		"@biomejs/biome": "npm:@biomejs/biome@^1.9.4",
 		"@types/node": "npm:@types/node@^22.10.2",
 		"@cross/test": "jsr:@cross/test@^0.0.10",
-		"@std/assert": "jsr:@std/assert@^1.0.9",
+		"@std/assert": "jsr:@std/assert@^1.0.10",
 		"sinon": "npm:sinon@^19.0.2"
 	}
 }
