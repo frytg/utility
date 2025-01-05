@@ -1,7 +1,15 @@
 /**
  * Storage module for S3 with common operations using MinIO.
- *
  * @module
+ *
+ * @example
+ * ```ts
+ * import { getRequiredEnv } from '@frytg/check-required-env/get'
+ * import { getObject } from '@frytg/storage-s3'
+ *
+ * const object = await getObject(getRequiredEnv('S3_BUCKET_NAME'), 'path/to/object.json', { parseJson: true })
+ * console.log(object)
+ * ```
  */
 
 // import packages

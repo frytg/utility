@@ -12,7 +12,7 @@
     "npm:@types/luxon@*": "3.4.2",
     "npm:@types/luxon@^3.4.2": "3.4.2",
     "npm:@types/node@*": "22.5.4",
-    "npm:@types/node@^22.10.2": "22.10.2",
+    "npm:@types/node@^22.10.5": "22.10.5",
     "npm:luxon@^3.5.0": "3.5.0",
     "npm:minio@^8.0.3": "8.0.3",
     "npm:sinon@^19.0.2": "19.0.2",
@@ -122,8 +122,8 @@
     "@types/luxon@3.4.2": {
       "integrity": "sha512-TifLZlFudklWlMBfhubvgqTXRzLDI5pCbGa4P8a3wPyUQSW+1xQ5eDsreP9DWHX3tjq1ke96uYG/nwundroWcA=="
     },
-    "@types/node@22.10.2": {
-      "integrity": "sha512-Xxr6BBRCAOQixvonOye19wnzyDiUtTeqldOOmj3CkeblonbccA12PFwlufvRdrpjXxqnmUaeiU5EOA+7s5diUQ==",
+    "@types/node@22.10.5": {
+      "integrity": "sha512-F8Q+SeGimwOo86fiovQh8qiXfFEh2/ocYv7tU5pJ3EXMSSxk1Joj5wefpFK2fHTf/N6HKGSxIDBT9f3gCxXPkQ==",
       "dependencies": [
         "undici-types@6.20.0"
       ]
@@ -675,7 +675,7 @@
       "jsr:@cross/test@^0.0.10",
       "jsr:@std/assert@^1.0.10",
       "npm:@biomejs/biome@^1.9.4",
-      "npm:@types/node@^22.10.2",
+      "npm:@types/node@^22.10.5",
       "npm:sinon@^19.0.2"
     ],
     "members": {
