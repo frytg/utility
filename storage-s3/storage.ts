@@ -1,7 +1,7 @@
 /**
  * Storage module for S3 with common operations using MinIO.
- * @module
- * @see https://min.io/docs/minio/linux/developers/javascript/API.html
+ *
+ * @see {@link https://min.io/docs/minio/linux/developers/javascript/API.html}
  *
  * @example
  * ```ts
@@ -10,6 +10,8 @@
  * const object = await getObject(process.env.S3_BUCKET_NAME, 'path/to/object.json', { parseJson: true })
  * console.log(object)
  * ```
+ *
+ * @module
  */
 
 // import packages
