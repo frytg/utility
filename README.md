@@ -26,6 +26,8 @@ Other tools that I regularly use and don't feel the need to optimize or re-creat
 - [`axios`](https://github.com/axios/axios) - _Promise based HTTP client for the browser and node.js_
 - [`hono`](https://jsr.io/@hono/hono) - _small, simple, and ultrafast web framework built on Web Standards_
 - [`undici`](https://github.com/nodejs/undici) - performant HTTP/1.1 client for Node.js
+- [`@upstash/redis`](https://github.com/upstash/redis-js) for HTTP redis and [`redis`](https://github.com/redis/node-redis) for TCP
+- [`@turf/turf`](https://github.com/Turfjs/turf) for anything geospatial
 
 ## Lint
 
