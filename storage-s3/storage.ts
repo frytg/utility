@@ -1,17 +1,6 @@
 /**
- * Storage module for S3 with common operations using MinIO.
- *
- * @see {@link https://min.io/docs/minio/linux/developers/javascript/API.html}
- *
- * @example
- * ```ts
- * import { getObject } from '@frytg/storage-s3'
- *
- * const object = await getObject(process.env.S3_BUCKET_NAME, 'path/to/object.json', { parseJson: true })
- * console.log(object)
- * ```
- *
  * @module
+ * Storage module for S3 with common operations using MinIO.
  */
 
 // import packages
@@ -40,9 +29,9 @@ export const Client: ClientType = minioClient
  * Retrieves an object from S3.
  * @param {string} bucketName - The name of the bucket to retrieve the object from.
  * @param {string} path - The path to the object in S3.
- * @param {object} options - The options for the operation.
- * @param {boolean} options.parseJson - Whether to parse the object as JSON. Defaults to `false`.
- * @param {boolean} options.throwError - Whether to throw an error if the object does not exist. Defaults to `true`.
+ * @param {object} [options] - The options for the operation.
+ * @param {boolean} [options.parseJson] - Whether to parse the object as JSON. Defaults to `false`.
+ * @param {boolean} [options.throwError] - Whether to throw an error if the object does not exist. Defaults to `true`.
  * @returns {Promise<Buffer | string | null>}
  *
  * @see https://min.io/docs/minio/linux/developers/javascript/API.html#getObject
@@ -52,7 +41,7 @@ export const Client: ClientType = minioClient
  * import { getRequiredEnv } from '@frytg/check-required-env/get'
  * import { getObject } from '@frytg/storage-s3'
  *
- * const object = await getObject(getRequiredEnv('S3_BUCKET_NAME'), 'path/to/object.json', { parseJson: true })
+ * const object = await getObject(getRequiredEnv('STORE_S3_BUCKET_NAME'), 'path/to/object.json', { parseJson: true })
  * console.log(object)
  * ```
  */
@@ -88,10 +77,9 @@ export const getObject = (
 
 /**
  * Uploads an object to S3.
+ * @param {string} bucketName - The name of the bucket to upload the object to.
  * @param {string} path - The path to the object in S3.
  * @param {Buffer | string} data - The data to upload. Can be a Buffer or a string. If JSON is passed, it will be stringified.
- * @param {object} options - The options for the operation.
- * @param {string} options.bucketName - The name of the bucket to upload the object to. Defaults to env `S3_BUCKET_NAME`.
  * @returns {Promise<void>}
  *
  * @see https://min.io/docs/minio/linux/developers/javascript/API.html#putObject
@@ -101,7 +89,7 @@ export const getObject = (
  * import { getRequiredEnv } from '@frytg/check-required-env/get'
  * import { uploadObject } from '@frytg/storage-s3'
  *
- * await uploadObject(getRequiredEnv('S3_BUCKET_NAME'), 'path/to/object.json', { foo: 'bar' })
+ * await uploadObject(getRequiredEnv('STORE_S3_BUCKET_NAME'), 'path/to/object.json', { foo: 'bar' })
  * ```
  *
  * @example Buffer
@@ -109,7 +97,7 @@ export const getObject = (
  * import { getRequiredEnv } from '@frytg/check-required-env/get'
  * import { uploadObject } from '@frytg/storage-s3'
  *
- * await uploadObject(getRequiredEnv('S3_BUCKET_NAME'), 'path/to/object.blob', Buffer.from('foo'))
+ * await uploadObject(getRequiredEnv('STORE_S3_BUCKET_NAME'), 'path/to/object.blob', Buffer.from('foo'))
  * ```
  */
 export const uploadObject = async (bucketName: string, path: string, data: Buffer | string): Promise<void> => {
@@ -125,9 +113,8 @@ export const uploadObject = async (bucketName: string, path: string, data: Buffe
 
 /**
  * Checks if an object exists in S3.
+ * @param {string} bucketName - The name of the bucket to check for the object.
  * @param {string} path - The path to the object in S3.
- * @param {object} options - The options for the operation.
- * @param {string} options.bucketName - The name of the bucket to check for the object. Defaults to env `S3_BUCKET_NAME`.
  * @returns {Promise<BucketItemStat | false>}
  *
  * @see https://min.io/docs/minio/linux/developers/javascript/API.html#statObject
@@ -137,7 +124,7 @@ export const uploadObject = async (bucketName: string, path: string, data: Buffe
  * import { getRequiredEnv } from '@frytg/check-required-env/get'
  * import { objectExists } from '@frytg/storage-s3'
  *
- * const exists = await objectExists(getRequiredEnv('S3_BUCKET_NAME'), 'path/to/object.json')
+ * const exists = await objectExists(getRequiredEnv('STORE_S3_BUCKET_NAME'), 'path/to/object.json')
  * console.log(exists) // null if it doesn't exist, otherwise the object stat
  * ```
  */
@@ -162,10 +149,9 @@ const readableStreamForListObjects = (stream: BucketStream<BucketItem>): Promise
 
 /**
  * Lists objects in S3.
+ * @param {string} bucketName - The name of the bucket to list the objects from.
  * @param {string} prefix - The prefix to filter the objects by.
- * @param {object} options - The options for the operation.
- * @param {boolean} options.recursive - Whether to list recursively. Defaults to `false`.
- * @param {string} options.bucketName - The name of the bucket to list the objects from. Defaults to env `S3_BUCKET_NAME`.
+ * @param {boolean} recursive - Whether to list recursively. Defaults to `false`.
  * @returns {Promise<BucketItem[]>}
  *
  * @see https://min.io/docs/minio/linux/developers/javascript/API.html#listObjectsV2
@@ -175,7 +161,7 @@ const readableStreamForListObjects = (stream: BucketStream<BucketItem>): Promise
  * import { getRequiredEnv } from '@frytg/check-required-env/get'
  * import { listObjects } from '@frytg/storage-s3'
  *
- * const objects = await listObjects(getRequiredEnv('S3_BUCKET_NAME'), 'path/to/prefix')
+ * const objects = await listObjects(getRequiredEnv('STORE_S3_BUCKET_NAME'), 'path/to/prefix')
  * console.log(objects)
  * ```
  *
@@ -184,7 +170,7 @@ const readableStreamForListObjects = (stream: BucketStream<BucketItem>): Promise
  * import { getRequiredEnv } from '@frytg/check-required-env/get'
  * import { listObjects } from '@frytg/storage-s3'
  *
- * const objects = await listObjects(getRequiredEnv('S3_BUCKET_NAME'), 'path/to/prefix', { recursive: true })
+ * const objects = await listObjects(getRequiredEnv('STORE_S3_BUCKET_NAME'), 'path/to/prefix', { recursive: true })
  * console.log(objects)
  * ```
  */

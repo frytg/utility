@@ -8,9 +8,10 @@ This is a simple opinionated wrapper around the S3 library [MinIO](https://min.i
 ## Usage
 
 ```ts
+import { getRequiredEnv } from '@frytg/check-required-env/get';
 import { getObject } from '@frytg/storage-s3';
 
-const object = await getObject('path/to/object.json', { parseJson: true });
+const object = await getObject(getRequiredEnv('STORE_S3_BUCKET_NAME'), 'path/to/object.json', { parseJson: true });
 ```
 
 The MinIO client will be initialized with these required environment variables:

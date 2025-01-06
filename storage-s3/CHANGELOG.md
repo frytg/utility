@@ -1,5 +1,9 @@
 # Storage S3 Changelog
 
+## 2025-01-06 - 0.0.5
+
+- fix: `@module` docs
+
 ## 2025-01-05 - 0.0.4
 
 - fix: `@module` docs
