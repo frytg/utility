@@ -3,13 +3,13 @@
 [![JSR @frytg/logger](https://jsr.io/badges/@frytg/logger)](https://jsr.io/@frytg/logger)
 [![ci](https://github.com/frytg/utility/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/frytg/utility/actions/workflows/test.yml)
 
-This is a simple opinionated wrapper around the logging library [Winston](https://github.com/winstonjs/winston) to provide a logger
-that is easy to use and configure.
+This is a simple opinionated wrapper around the logging library [Winston](https://github.com/winstonjs/winston)
+to provide a logger that is easy to use and configure.
 
 It accesses and inject several env variables (like runtime or package version) to each log event.
 
-If `IS_LOCAL` is set to `true`, it will use a more human readable, colorized output format, otherwise it will use JSON
-on one line.
+If `IS_LOCAL` is set to `true`, it will use a more human readable, colorized output format,
+otherwise it will use JSON on one line.
 
 Debug logs will only be logged if the env `STAGE` is set to `dev`.
 
@@ -27,6 +27,34 @@ logger.log({
   data: { name: 'my-data' },
 });
 ```
+
+## Configuration
+
+The logger accesses and injects several env variables to each log event (envs listed in order of priority):
+
+- `host` - the host name (e.g. `my-function`)
+  - `K_REVISION` - set by Knative such as Google Cloud Run
+  - `AWS_LAMBDA_FUNCTION_NAME` - set by AWS Lambda
+  - `os.hostname()` - fallback
+- `serviceName` - the service name (e.g. `my-service`)
+  - `SERVICE_NAME` - set by your deployment
+- `stage` - the stage (e.g. `dev`)
+  - `STAGE` - set by your deployment
+- `version` - the version (e.g. `1.0.0`)
+  - `npm_package_version` - set by your deployment in `package.json`
+- `region` - the region (e.g. `eu-west-1`)
+  - `REGION` - set by your deployment
+  - `AWS_REGION` - set by AWS Lambda
+- `runtime` - the runtime (e.g. `nodejs-20.11.0`)
+  - `process.versions.bun` - set by Bun
+  - `process.versions.deno` - set by Deno
+  - `process.env.AWS_EXECUTION_ENV` - set by AWS Lambda
+  - `process.version` - fallback (usually Node.js)
+
+Additionally these environment variables are triggering different logging formats:
+
+- `IS_LOCAL` - set to `true` to use a more human readable, colorized output format that uses multiple lines
+- `STAGE` - set to `dev` to enable debug logs
 
 ## Log Levels
 

@@ -32,15 +32,17 @@ const convertError = format((event) => {
 export const detectProcessVersion = (): string => {
 	if (process.versions?.bun) return `bun-${process.versions.bun}`
 	if (process.versions?.deno) return `deno-${process.versions.deno}`
-	return process.version
+	if (process.env.AWS_EXECUTION_ENV) return process.env.AWS_EXECUTION_ENV.replace(/_/g, '-')
+	return `nodejs-${process.version}`
 }
 
 // Add global context to log events
 const convertGlobals = format((event) => {
-	event.host = process.env.K_REVISION || hostName
-	event.serviceName = process.env.SERVICE_NAME
-	event.stage = process.env.STAGE
+	event.host = process.env.K_REVISION || process.env.AWS_LAMBDA_FUNCTION_NAME || hostName
+	event.serviceName = process.env.SERVICE_NAME || null
+	event.stage = process.env.STAGE || null
 	event.version = process.env.npm_package_version
+	event.region = process.env.REGION || process.env.AWS_REGION || null
 	event.runtime = detectProcessVersion()
 	return event
 })
