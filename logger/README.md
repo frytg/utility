@@ -33,23 +33,23 @@ logger.log({
 The logger accesses and injects several env variables to each log event (envs listed in order of priority):
 
 - `host` - the host name (e.g. `my-function`)
-  - `K_REVISION` - set by Knative such as Google Cloud Run
-  - `AWS_LAMBDA_FUNCTION_NAME` - set by AWS Lambda
-  - `os.hostname()` - fallback
+  - from env `K_REVISION` - set by Knative such as Google Cloud Run
+  - from env`AWS_LAMBDA_FUNCTION_NAME` - set by AWS Lambda
+  - from `os.hostname()` - fallback
 - `serviceName` - the service name (e.g. `my-service`)
-  - `SERVICE_NAME` - set by your deployment
+  - from env `SERVICE_NAME` - set by your deployment
 - `stage` - the stage (e.g. `dev`)
-  - `STAGE` - set by your deployment
+  - from env `STAGE` - set by your deployment
 - `version` - the version (e.g. `1.0.0`)
-  - `npm_package_version` - set by your deployment in `package.json`
+  - from env `npm_package_version` - set by your deployment in `package.json`
 - `region` - the region (e.g. `eu-west-1`)
-  - `REGION` - set by your deployment
-  - `AWS_REGION` - set by AWS Lambda
+  - from env `REGION` - set by your deployment
+  - from env `AWS_REGION` - set by AWS Lambda
 - `runtime` - the runtime (e.g. `nodejs-20.11.0`)
-  - `process.versions.bun` - set by Bun
-  - `process.versions.deno` - set by Deno
-  - `process.env.AWS_EXECUTION_ENV` - set by AWS Lambda
-  - `process.version` - fallback (usually Node.js)
+  - from `process.versions.bun` - set by Bun
+  - from `process.versions.deno` - set by Deno
+  - from `process.env.AWS_EXECUTION_ENV` - set by AWS Lambda
+  - from `process.version` - fallback (usually Node.js)
 
 Additionally these environment variables are triggering different logging formats:
 
