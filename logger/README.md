@@ -38,9 +38,12 @@ The logger accesses and injects several env variables to each log event (envs li
   - from `os.hostname()` - fallback
 - `serviceName` - the service name (e.g. `my-service`)
   - from env `SERVICE_NAME` - set by your deployment
+  - from env `K_SERVICE` - set by Knative such as Google Cloud Run
 - `stage` - the stage (e.g. `dev`)
   - from env `STAGE` - set by your deployment
+  - from env `NODE_ENV` - set by your deployment
 - `version` - the version (e.g. `1.0.0`)
+  - from env `SERVICE_VERSION` - set by your deployment
   - from env `npm_package_version` - set by your deployment in `package.json`
 - `region` - the region (e.g. `eu-west-1`)
   - from env `REGION` - set by your deployment
@@ -48,7 +51,7 @@ The logger accesses and injects several env variables to each log event (envs li
 - `runtime` - the runtime (e.g. `nodejs-20.11.0`)
   - from `process.versions.bun` - set by Bun
   - from `process.versions.deno` - set by Deno
-  - from `process.env.AWS_EXECUTION_ENV` - set by AWS Lambda
+  - from env `AWS_EXECUTION_ENV` - set by AWS Lambda
   - from `process.version` - fallback (usually Node.js)
 
 Additionally these environment variables are triggering different logging formats:
@@ -59,7 +62,7 @@ Additionally these environment variables are triggering different logging format
 ## Log Levels
 
 It is currently pre-configured with the
-[syslog log levels](https://github.com/winstonjs/winston?tab=readme-ov-file#logging-levels):
+[syslog log levels](https://github.com/winstonjs/winston?tab=readme-ov-file#logging-levels) from most to least severe:
 
 ```ts
 {

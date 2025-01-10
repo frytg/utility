@@ -39,9 +39,9 @@ export const detectProcessVersion = (): string => {
 // Add global context to log events
 const convertGlobals = format((event) => {
 	event.host = process.env.K_REVISION || process.env.AWS_LAMBDA_FUNCTION_NAME || hostName
-	event.serviceName = process.env.SERVICE_NAME || null
-	event.stage = process.env.STAGE || null
-	event.version = process.env.npm_package_version
+	event.serviceName = process.env.SERVICE_NAME || process.env.K_SERVICE || null
+	event.stage = process.env.STAGE || process.env.NODE_ENV || null
+	event.version = process.env.SERVICE_VERSION || process.env.npm_package_version
 	event.region = process.env.REGION || process.env.AWS_REGION || null
 	event.runtime = detectProcessVersion()
 	return event
