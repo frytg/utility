@@ -8,6 +8,8 @@ A collection of utilities for TypeScript and JavaScript.
 
 This repository is work in progress.
 
+It is tested against Bun, Deno, and Node.js runtimes. Published on [jsr.io (`@frytg`)](https://jsr.io/@frytg).
+
 ## Tools
 
 - [`@frytg/check-required-env`](./check-required-env/README.md) - Check a required environment variable
@@ -25,9 +27,10 @@ Other tools that I regularly use and don't feel the need to optimize or re-creat
 
 - [`axios`](https://github.com/axios/axios) - _Promise based HTTP client for the browser and node.js_
 - [`hono`](https://jsr.io/@hono/hono) - _small, simple, and ultrafast web framework built on Web Standards_
-- [`undici`](https://github.com/nodejs/undici) - performant HTTP/1.1 client for Node.js
+- [`undici`](https://github.com/nodejs/undici) - _performant HTTP/1.1 client for Node.js_
 - [`@upstash/redis`](https://github.com/upstash/redis-js) for HTTP redis and [`redis`](https://github.com/redis/node-redis) for TCP
-- [`@turf/turf`](https://github.com/Turfjs/turf) for anything geospatial
+- [`tailwindcss`](https://tailwindcss.com/docs/installation) - _CSS framework for rapid UI development_
+- [`@turf/turf`](https://github.com/Turfjs/turf) _for anything geospatial_
 
 ## Lint
 
