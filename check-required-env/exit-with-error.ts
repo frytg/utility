@@ -16,7 +16,7 @@ import logger from '@frytg/logger'
  * exitWithError(someKeyVar)
  * ```
  */
-export const exitWithError = (input: string | string[] | object | null | undefined): void => {
+export const exitWithError = (input: string | string[] | number | object | null | undefined): void => {
 	// return if the variable is set and not empty
 	if (input && input !== '') return
 
