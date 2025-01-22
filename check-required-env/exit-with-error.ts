@@ -12,7 +12,8 @@ import logger from '@frytg/logger'
  * ```ts
  * import { exitWithError } from '@frytg/check-required-env/exit'
  *
- * exitWithError('MY_IMPORTANT_ENV_VAR')
+ * const someKeyVar = null
+ * exitWithError(someKeyVar)
  * ```
  */
 export const exitWithError = (input: string | string[] | object | null | undefined): void => {
