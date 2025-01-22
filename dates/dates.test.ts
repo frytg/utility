@@ -100,3 +100,27 @@ test('getFullRelativeTime() combines date and relative time', () => {
 	assert(fullRelative.includes('2024'))
 	assert(fullRelative.includes('ago'))
 })
+
+test('getFullRelativeTime() uses locale (NL)', () => {
+	const date = DateTime.fromISO('2024-03-01T12:00:00Z')
+	const fullRelative = getFullRelativeTime(date, 'nl')
+	assert(fullRelative.includes('maart'))
+	assert(fullRelative.includes('2024'))
+	assert(fullRelative.includes('geleden'))
+})
+
+test('getFullRelativeTime() uses locale (FR)', () => {
+	const date = DateTime.fromISO('2024-03-01T12:00:00Z')
+	const fullRelative = getFullRelativeTime(date, 'fr')
+	assert(fullRelative.includes('mars'))
+	assert(fullRelative.includes('2024'))
+	assert(fullRelative.includes('il y a'))
+})
+
+test('getFullRelativeTime() uses locale (DE)', () => {
+	const date = DateTime.fromISO('2024-03-01T12:00:00Z')
+	const fullRelative = getFullRelativeTime(date, 'de')
+	assert(fullRelative.includes('März'))
+	assert(fullRelative.includes('2024'))
+	assert(fullRelative.includes('vor'))
+})
