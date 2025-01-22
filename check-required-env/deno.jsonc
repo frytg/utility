@@ -4,7 +4,8 @@
 	"version": "0.1.0",
 	"exports": {
 		".": "./check-required-env.ts",
-		"./get": "./get-required-env.ts"
+		"./get": "./get-required-env.ts",
+		"./exit": "./exit-with-error.ts"
 	},
 	"imports": {
 		"@frytg/logger": "jsr:@frytg/logger@0.0.2"
