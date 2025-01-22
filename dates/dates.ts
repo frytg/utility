@@ -3,6 +3,7 @@ import { format as stdFormat } from '@std/fmt/duration'
 // @deno-types="npm:@types/luxon@^3.4.2"
 import { DateTime } from 'luxon'
 
+const DEFAULT_LOCALE = 'en'
 const LOCAL_TIMEZONE = 'Europe/Amsterdam'
 const DATE_HOUR_MINUTES_FORMAT = 'ccc, d. LLLL yyyy - h:mma'
 
@@ -136,7 +137,7 @@ export const getMsOffset = (ms: number): number => getMs() - ms
 /**
  * Get relative time
  * @param {DateTime} date - date object
- * @param {string} [locale] - locale (default: 'en-US')
+ * @param {string} [locale] - locale (default: en)
  * @returns {string} relative time
  *
  * @example
@@ -147,7 +148,7 @@ export const getMsOffset = (ms: number): number => getMs() - ms
  * getRelative(getNow(), 'nl-NL')
  * ```
  */
-export const getRelative = (date: DateTime, locale = 'en-US'): string | null => date.toRelative({ locale })
+export const getRelative = (date: DateTime, locale = DEFAULT_LOCALE): string | null => date.toRelative({ locale })
 
 /**
  * Get year-month-day (YYYYMMDD or YYYY-MM-DD)
@@ -191,6 +192,7 @@ export const parseIso = parseISO
 /**
  * Format the date in a human readable way (like 'Mon, 23. Nov 2024 - 10:00AM')
  * @param {DateTime} date - date object
+ * @param {string} [locale] - locale (default: en)
  * @returns {string} readable date
  *
  * @example
@@ -198,14 +200,16 @@ export const parseIso = parseISO
  * import { getDateHourMinutes } from '@frytg/dates'
  *
  * getDateHourMinutes(getNow())
+ * getDateHourMinutes(getNow(), 'nl')
  * ```
  */
-export const getDateHourMinutes = (date: DateTime): string =>
-	`${date.setLocale('en').toFormat(DATE_HOUR_MINUTES_FORMAT)}`
+export const getDateHourMinutes = (date: DateTime, locale = DEFAULT_LOCALE): string =>
+	`${date.setLocale(locale).toFormat(DATE_HOUR_MINUTES_FORMAT)}`
 
 /**
  * Get full relative time (combines {@link getDateHourMinutes} and {@link getRelative})
  * @param {DateTime} date - date object
+ * @param {string} [locale] - locale (default: en)
  * @returns {string} full relative time
  *
  * @example
@@ -213,9 +217,11 @@ export const getDateHourMinutes = (date: DateTime): string =>
  * import { getFullRelativeTime } from '@frytg/dates'
  *
  * getFullRelativeTime(getNow())
+ * getFullRelativeTime(getNow(), 'nl')
  * ```
  */
-export const getFullRelativeTime = (date: DateTime): string => `${getDateHourMinutes(date)} (${getRelative(date)})`
+export const getFullRelativeTime = (date: DateTime, locale = DEFAULT_LOCALE): string =>
+	`${getDateHourMinutes(date, locale)} (${getRelative(date, locale)})`
 
 /**
  * Format a duration in milliseconds to a human readable string.

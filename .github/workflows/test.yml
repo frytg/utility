@@ -29,7 +29,8 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-latest
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
           - windows-latest
           - macOS-latest
     steps:
@@ -59,7 +60,7 @@ jobs:
 
       - name: Publish dry run
         run: deno publish --dry-run
-        if: matrix.os == 'ubuntu-latest'
+        if: matrix.os == 'ubuntu-24.04'
 
   test-on-bun:
     runs-on: ${{ matrix.os }}
@@ -68,7 +69,8 @@ jobs:
       fail-fast: false
       matrix:
         os:
-          - ubuntu-latest
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
           - windows-latest
           - macOS-latest
     steps:
@@ -107,7 +109,8 @@ jobs:
           - 22
           - 23
         os:
-          - ubuntu-latest
+          - ubuntu-24.04
+          - ubuntu-24.04-arm
           - windows-latest
           - macOS-latest
     steps:

@@ -1,5 +1,9 @@
 # Dates Changelog
 
+## 2025-01-22 - 0.2.0
+
+- feat: add `getFullRelativeTime` to get a full relative time string
+
 ## 2024-12-22 - 0.1.1
 
 - fix: added `@deno-types` to `DateTime` import
