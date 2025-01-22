@@ -1,6 +1,6 @@
 # adapted from https://github.com/denoland/std/blob/main/.github/workflows/workspace_publish.yml
 
-name: workspace publish
+name: Publish to JSR
 
 on:
   release:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   publish:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
     timeout-minutes: 30
 
     permissions:

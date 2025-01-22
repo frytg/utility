@@ -1,5 +1,9 @@
 # Check Required Env Changelog
 
+## 2025-01-22 - 0.2.0
+
+- feat: add `exitWithError`
+
 ## 2024-12-17 - 0.1.0
 
 - feat: add `getRequiredEnv`
