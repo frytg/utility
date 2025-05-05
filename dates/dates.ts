@@ -3,9 +3,11 @@ import { format as stdFormat } from '@std/fmt/duration'
 // @deno-types="npm:@types/luxon@^3.4.2"
 import { DateTime } from 'luxon'
 
+// docs for luxon shortcuts: https://moment.github.io/luxon/#/formatting?id=table-of-tokens
 const DEFAULT_LOCALE = 'en'
 const LOCAL_TIMEZONE = 'Europe/Amsterdam'
 const DATE_HOUR_MINUTES_FORMAT = 'ccc, d. LLLL yyyy - h:mma'
+const DATE_HOUR_MINUTES_FORMAT_24H = 'ccc, d. LLLL yyyy - HH:mm'
 
 /**
  * Export DateTime from Luxon
@@ -23,6 +25,7 @@ export { DateTime }
 /**
  * Convert date to local time
  * @param {DateTime} date - date object to convert
+ * @param {string} [timezone] - timezone (default: Europe/Amsterdam)
  * @returns {DateTime} date in local time
  *
  * @example
@@ -32,7 +35,7 @@ export { DateTime }
  * toLocal(getNow())
  * ```
  */
-export const toLocal = (date: DateTime): DateTime => date.setZone(LOCAL_TIMEZONE)
+export const toLocal = (date: DateTime, timezone = LOCAL_TIMEZONE): DateTime => date.setZone(timezone)
 
 /**
  * Converts ms timestamp to s
@@ -138,6 +141,7 @@ export const getMsOffset = (ms: number): number => getMs() - ms
  * Get relative time
  * @param {DateTime} date - date object
  * @param {string} [locale] - locale (default: en)
+ * @param {string} [timezone] - timezone (default: Europe/Amsterdam)
  * @returns {string} relative time
  *
  * @example
@@ -146,9 +150,11 @@ export const getMsOffset = (ms: number): number => getMs() - ms
  *
  * getRelative(getNow())
  * getRelative(getNow(), 'nl-NL')
+ * getRelative(getNow(), 'nl-NL', 'Europe/Amsterdam')
  * ```
  */
-export const getRelative = (date: DateTime, locale = DEFAULT_LOCALE): string | null => date.toRelative({ locale })
+export const getRelative = (date: DateTime, locale = DEFAULT_LOCALE, timezone = LOCAL_TIMEZONE): string | null =>
+	date.setZone(timezone).toRelative({ locale })
 
 /**
  * Get year-month-day (YYYYMMDD or YYYY-MM-DD)
@@ -193,6 +199,8 @@ export const parseIso = parseISO
  * Format the date in a human readable way (like 'Mon, 23. Nov 2024 - 10:00AM')
  * @param {DateTime} date - date object
  * @param {string} [locale] - locale (default: en)
+ * @param {string} [timezone] - timezone (default: Europe/Amsterdam)
+ * @param {boolean} [prefer24h] - prefer 24h format (default: false)
  * @returns {string} readable date
  *
  * @example
@@ -201,15 +209,27 @@ export const parseIso = parseISO
  *
  * getDateHourMinutes(getNow())
  * getDateHourMinutes(getNow(), 'nl')
+ * getDateHourMinutes(getNow(), 'nl', 'Europe/Amsterdam')
+ * getDateHourMinutes(getNow(), 'nl', 'Europe/Amsterdam', true)
  * ```
  */
-export const getDateHourMinutes = (date: DateTime, locale = DEFAULT_LOCALE): string =>
-	`${date.setLocale(locale).toFormat(DATE_HOUR_MINUTES_FORMAT)}`
+export const getDateHourMinutes = (
+	date: DateTime,
+	locale = DEFAULT_LOCALE,
+	timezone = LOCAL_TIMEZONE,
+	prefer24h = false,
+): string =>
+	date
+		.setZone(timezone)
+		.setLocale(locale)
+		.toFormat(prefer24h ? DATE_HOUR_MINUTES_FORMAT_24H : DATE_HOUR_MINUTES_FORMAT)
 
 /**
  * Get full relative time (combines {@link getDateHourMinutes} and {@link getRelative})
  * @param {DateTime} date - date object
  * @param {string} [locale] - locale (default: en)
+ * @param {string} [timezone] - timezone (default: Europe/Amsterdam)
+ * @param {boolean} [prefer24h] - prefer 24h format (default: false)
  * @returns {string} full relative time
  *
  * @example
@@ -218,10 +238,16 @@ export const getDateHourMinutes = (date: DateTime, locale = DEFAULT_LOCALE): str
  *
  * getFullRelativeTime(getNow())
  * getFullRelativeTime(getNow(), 'nl')
+ * getFullRelativeTime(getNow(), 'nl', 'Europe/Amsterdam')
+ * getFullRelativeTime(getNow(), 'nl', 'Europe/Amsterdam', true)
  * ```
  */
-export const getFullRelativeTime = (date: DateTime, locale = DEFAULT_LOCALE): string =>
-	`${getDateHourMinutes(date, locale)} (${getRelative(date, locale)})`
+export const getFullRelativeTime = (
+	date: DateTime,
+	locale = DEFAULT_LOCALE,
+	timezone = LOCAL_TIMEZONE,
+	prefer24h = false,
+): string => `${getDateHourMinutes(date, locale, timezone, prefer24h)} (${getRelative(date, locale, timezone)})`
 
 /**
  * Format a duration in milliseconds to a human readable string.

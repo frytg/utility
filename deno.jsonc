@@ -35,9 +35,9 @@
 	"workspace": ["./check-required-env", "./crypto", "./dates", "./logger", "./storage-s3"],
 	"imports": {
 		"@biomejs/biome": "npm:@biomejs/biome@^1.9.4",
-		"@types/node": "npm:@types/node@^22.10.5",
+		"@types/node": "npm:@types/node@^22.15.3",
 		"@cross/test": "jsr:@cross/test@^0.0.10",
-		"@std/assert": "jsr:@std/assert@^1.0.10",
-		"sinon": "npm:sinon@^19.0.2"
+		"@std/assert": "jsr:@std/assert@^1.0.13",
+		"sinon": "npm:sinon@^20.0.0"
 	}
 }

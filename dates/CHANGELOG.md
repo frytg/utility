@@ -1,5 +1,9 @@
 # Dates Changelog
 
+## 2025-05-05 - 0.3.0
+
+- feat: add `prefer24h` to `getFullRelativeTime` and `getDateHourMinutes`
+
 ## 2025-01-22 - 0.2.0
 
 - feat: add `getFullRelativeTime` to get a full relative time string
