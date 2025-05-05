@@ -1,3 +1,4 @@
+// deno-lint-ignore-file no-console
 import { test } from '@cross/test'
 import { assert, assertEquals } from '@std/assert'
 
@@ -87,40 +88,90 @@ test('parseIso() is an alias for parseISO()', () => {
 })
 
 test('getDateHourMinutes() formats date in human readable way', () => {
-	const date = DateTime.fromISO('2024-03-15T12:00:00Z')
+	const input = '2024-03-15T12:00:00Z'
+	const date = DateTime.fromISO(input)
 	const formatted = getDateHourMinutes(date)
+	console.log(input, '>>>', formatted)
 	assert(formatted.includes('Mar'))
 	assert(formatted.includes('2024'))
 })
 
+test('getDateHourMinutes() formats date in human readable way (24h)', () => {
+	const input = '2024-03-15T14:00:00Z'
+	const date = DateTime.fromISO(input)
+	const formatted = getDateHourMinutes(date, 'en', 'UTC', true)
+	console.log(input, '>>>', formatted)
+	assert(formatted.includes('Mar'))
+	assert(formatted.includes('2024'))
+	assert(formatted.includes('14:00'))
+})
+
+test('getDateHourMinutes() formats date in human readable way (timezones)', () => {
+	const input = '2024-03-15T14:00:00Z'
+	const date = DateTime.fromISO(input)
+	const formatted = getDateHourMinutes(date, 'en', 'UTC+01:00', true)
+	console.log(input, '>>>', formatted)
+	assert(formatted.includes('15:00'))
+})
+
 test('getFullRelativeTime() combines date and relative time', () => {
-	const date = DateTime.fromISO('2024-03-15T12:00:00Z')
+	const input = '2024-03-15T12:00:00Z'
+	const date = DateTime.fromISO(input)
 	const fullRelative = getFullRelativeTime(date)
+	console.log(input, '>>>', fullRelative)
 	assert(fullRelative.includes('Mar'))
 	assert(fullRelative.includes('2024'))
 	assert(fullRelative.includes('ago'))
 })
 
 test('getFullRelativeTime() uses locale (NL)', () => {
-	const date = DateTime.fromISO('2024-03-01T12:00:00Z')
+	const input = '2024-03-01T12:00:00Z'
+	const date = DateTime.fromISO(input)
 	const fullRelative = getFullRelativeTime(date, 'nl')
+	console.log(input, '>>>', fullRelative)
 	assert(fullRelative.includes('maart'))
 	assert(fullRelative.includes('2024'))
 	assert(fullRelative.includes('geleden'))
 })
 
 test('getFullRelativeTime() uses locale (FR)', () => {
-	const date = DateTime.fromISO('2024-03-01T12:00:00Z')
+	const input = '2024-03-01T12:00:00Z'
+	const date = DateTime.fromISO(input)
 	const fullRelative = getFullRelativeTime(date, 'fr')
+	console.log(input, '>>>', fullRelative)
 	assert(fullRelative.includes('mars'))
 	assert(fullRelative.includes('2024'))
 	assert(fullRelative.includes('il y a'))
 })
 
 test('getFullRelativeTime() uses locale (DE)', () => {
-	const date = DateTime.fromISO('2024-03-01T12:00:00Z')
+	const input = '2024-03-01T12:00:00Z'
+	const date = DateTime.fromISO(input)
 	const fullRelative = getFullRelativeTime(date, 'de')
+	console.log(input, '>>>', fullRelative)
 	assert(fullRelative.includes('März'))
 	assert(fullRelative.includes('2024'))
+	assert(fullRelative.includes('vor'))
+})
+
+test('getFullRelativeTime() uses timezone (UTC+01:00)', () => {
+	const input = '2024-03-01T12:00:00Z'
+	const date = DateTime.fromISO(input)
+	const fullRelative = getFullRelativeTime(date, 'en', 'UTC+01:00')
+	console.log(input, '>>>', fullRelative)
+	assert(fullRelative.includes('Mar'))
+	assert(fullRelative.includes('2024'))
+	assert(fullRelative.includes(' 1:00'))
+	assert(fullRelative.includes('ago'))
+})
+
+test('getFullRelativeTime() uses 24h format (DE, UTC+01:00)', () => {
+	const input = '2024-03-01T12:00:00Z'
+	const date = DateTime.fromISO(input)
+	const fullRelative = getFullRelativeTime(date, 'de', 'UTC+01:00', true)
+	console.log(input, '>>>', fullRelative)
+	assert(fullRelative.includes('März'))
+	assert(fullRelative.includes('2024'))
+	assert(fullRelative.includes('13:00'))
 	assert(fullRelative.includes('vor'))
 })
