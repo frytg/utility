@@ -4,7 +4,7 @@
 	"version": "0.0.3",
 	"exports": "./logger.ts",
 	"imports": {
-		"winston": "npm:winston@^3.17.0"
+		"winston": "npm:winston@^3.19.0"
 	},
 	"publish": {
 		"exclude": ["*.test.ts"]

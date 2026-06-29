@@ -18,7 +18,7 @@
 		"check": "deno fmt --check && deno lint && biome lint",
 		"dry-run": "deno publish --dry-run",
 		"test": "deno test --allow-sys --allow-env --clean --coverage",
-		"update": "deno outdated --update --latest"
+		"update": "deno outdated --update --latest --recursive"
 	},
 	"lint": {
 		"rules": {
@@ -34,10 +34,10 @@
 	},
 	"workspace": ["./check-required-env", "./crypto", "./dates", "./logger", "./storage-s3"],
 	"imports": {
-		"@biomejs/biome": "npm:@biomejs/biome@^1.9.4",
-		"@types/node": "npm:@types/node@^22.15.3",
-		"@cross/test": "jsr:@cross/test@^0.0.10",
-		"@std/assert": "jsr:@std/assert@^1.0.13",
-		"sinon": "npm:sinon@^20.0.0"
+		"@biomejs/biome": "npm:@biomejs/biome@^2.5.1",
+		"@types/node": "npm:@types/node@^26.0.1",
+		"@cross/test": "jsr:@cross/test@^0.0.14",
+		"@std/assert": "jsr:@std/assert@^1.0.19",
+		"sinon": "npm:sinon@^22.0.0"
 	}
 }

@@ -4,9 +4,9 @@
 	"version": "0.3.0",
 	"exports": "./dates.ts",
 	"imports": {
-		"@std/fmt": "jsr:@std/fmt@^1.0.3",
-		"@types/luxon": "npm:@types/luxon@^3.4.2",
-		"luxon": "npm:luxon@^3.6.1"
+		"@std/fmt": "jsr:@std/fmt@^1.0.10",
+		"@types/luxon": "npm:@types/luxon@^3.7.2",
+		"luxon": "npm:luxon@^3.7.2"
 	},
 	"publish": {
 		"exclude": ["*.test.ts"]

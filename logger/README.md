@@ -3,7 +3,7 @@
 [![JSR @frytg/logger](https://jsr.io/badges/@frytg/logger)](https://jsr.io/@frytg/logger)
 [![ci](https://github.com/frytg/utility/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/frytg/utility/actions/workflows/test.yml)
 
-This is a simple opinionated wrapper around the logging library [Winston](https://github.com/winstonjs/winston)
+This is a simple opinionated wrapper around the logging library [Winston](https://github.com/winstonjs/winston) (on [npmx.dev](https://npmx.dev/package/winston))
 to provide a logger that is easy to use and configure.
 
 It accesses and inject several env variables (like runtime or package version) to each log event.

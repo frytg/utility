@@ -8,7 +8,7 @@
 		"./exit": "./exit-with-error.ts"
 	},
 	"imports": {
-		"@frytg/logger": "jsr:@frytg/logger@0.0.2"
+		"@frytg/logger": "jsr:@frytg/logger@0.0.3"
 	},
 	"publish": {
 		"exclude": ["*.test.ts"]
