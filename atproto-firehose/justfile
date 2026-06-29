@@ -1,0 +1,15 @@
+# run `just` in this directory to see available commands
+_default:
+	just --list
+
+# connect to the Bluesky firehose and log matching posts
+run keywords="ard.json":
+	go run . -keywords {{keywords}}
+
+# build the firehose watcher binary
+build:
+	go build -o bin/atproto-firehose .
+
+# download and tidy module dependencies
+tidy:
+	go mod tidy
