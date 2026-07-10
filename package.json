@@ -15,6 +15,6 @@
 	},
 	"packageManager": "nub@0.4.7",
 	"scripts": {
-		"test": "tsx scripts/run-tests.ts"
+		"test": "tsx --test **/*.test.ts"
 	}
 }

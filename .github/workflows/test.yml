@@ -122,5 +122,14 @@ jobs:
       - name: Install dependencies
         run: nub ci
 
-      - name: Test
-        run: nub run test
+      - name: Test (Windows)
+        if: matrix.os == 'windows-latest'
+        run: |
+          Get-ChildItem -Recurse -Filter *.test.ts | ForEach-Object {
+            tsx --test $_.FullName
+          }
+        shell: pwsh
+
+      - name: Test (Linux/macOS)
+        if: matrix.os != 'windows-latest'
+        run: tsx --test **/*.test.ts
