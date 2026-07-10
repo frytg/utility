@@ -121,7 +121,7 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v6
+      - uses: nubjs/setup-nub@v0
         with:
           node-version: ${{ matrix.node-version }}
 
@@ -129,10 +129,10 @@ jobs:
         run: node --version
 
       - name: Install JSR dependencies
-        run: npx jsr add ${{ env.JSR_DEPENDENCIES }}
+        run: nubx jsr add ${{ env.JSR_DEPENDENCIES }}
 
       - name: Install NPM dependencies
-        run: npm install ${{ env.NPM_DEPENDENCIES }}
+        run: nub add ${{ env.NPM_DEPENDENCIES }}
 
       - name: Set up package.json
         run: 'echo ''{ "type": "module" }'' > package.json'
@@ -140,12 +140,12 @@ jobs:
       - name: Test (Windows)
         if: matrix.os == 'windows-latest'
         run: |
-          $files = npx --yes glob "**/*.test.ts"
+          $files = nubx --yes glob "**/*.test.ts"
           foreach ($file in $files) {
-            npx tsx --test $file
+            nub --test $file
           }
         shell: pwsh
 
       - name: Test (Linux/macOS)
         if: matrix.os != 'windows-latest'
-        run: npx --yes tsx --test **/*.test.ts
+        run: nub --test **/*.test.ts
