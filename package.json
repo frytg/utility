@@ -1,0 +1,20 @@
+{
+	"name": "@frytg/utility",
+	"private": true,
+	"type": "module",
+	"devDependencies": {
+		"@cross/test": "npm:@jsr/cross__test@^0.0.14",
+		"@std/assert": "npm:@jsr/std__assert@^1.0.19",
+		"@std/fmt": "npm:@jsr/std__fmt@^1.0.10",
+		"@frytg/logger": "npm:@jsr/frytg__logger@^0.0.3",
+		"luxon": "^3.7.2",
+		"minio": "^8.0.7",
+		"sinon": "^22.0.0",
+		"tsx": "^4.19.3",
+		"winston": "^3.19.0"
+	},
+	"packageManager": "nub@0.4.7",
+	"scripts": {
+		"test": "tsx scripts/run-tests.ts"
+	}
+}
