@@ -129,7 +129,7 @@ jobs:
         run: node --version
 
       - name: Install JSR dependencies
-        run: nubx jsr add ${{ env.JSR_DEPENDENCIES }}
+        run: nubx -y jsr add ${{ env.JSR_DEPENDENCIES }}
 
       - name: Install NPM dependencies
         run: nub add ${{ env.NPM_DEPENDENCIES }}
@@ -140,7 +140,7 @@ jobs:
       - name: Test (Windows)
         if: matrix.os == 'windows-latest'
         run: |
-          $files = nubx --yes glob "**/*.test.ts"
+          $files = nubx -y glob "**/*.test.ts"
           foreach ($file in $files) {
             nub --test $file
           }
