@@ -19,7 +19,7 @@ permissions:
 env:
   NODE_ENV: production
   JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger"
-  NPM_DEPENDENCIES: "luxon minio sinon"
+  NPM_DEPENDENCIES: "luxon minio sinon winston"
 
 jobs:
   test-on-deno-and-lint:
@@ -105,9 +105,8 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - 20
-          - 22
-          - 23
+          - 26
+          - 24
         os:
           - ubuntu-24.04
           - ubuntu-24.04-arm
@@ -135,7 +134,7 @@ jobs:
         run: nub add ${{ env.NPM_DEPENDENCIES }}
 
       - name: Set up package.json
-        run: 'echo ''{ "type": "module" }'' > package.json'
+        run: node -e "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); pkg.type='module'; fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n')"
 
       - name: Test (Windows)
         if: matrix.os == 'windows-latest'
