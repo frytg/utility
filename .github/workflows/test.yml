@@ -139,9 +139,8 @@ jobs:
       - name: Test (Windows)
         if: matrix.os == 'windows-latest'
         run: |
-          $files = nubx -y glob "**/*.test.ts"
-          foreach ($file in $files) {
-            nubx tsx --test $file
+          Get-ChildItem -Recurse -Filter *.test.ts | ForEach-Object {
+            nubx tsx --test $_.FullName
           }
         shell: pwsh
 
