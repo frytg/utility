@@ -34,7 +34,7 @@ Other tools that I regularly use and don't feel the need to optimize or re-creat
 
 ## Lint
 
-Use `deno fmt`, `deno lint` and `biome lint` to check the code.
+Use `deno fmt`, `deno lint`, and `deno run -A @biomejs/biome lint` to check the code.
 
 ```bash
 deno task check
@@ -48,6 +48,13 @@ This uses [`@cross/test`](https://jsr.io/@cross/test) and [`sinon`](https://sino
 
 ```bash
 deno task test
+```
+
+For Node.js and Bun, install dependencies with [Nub](https://nubjs.com/docs) and run tests:
+
+```bash
+nub install
+nub run test
 ```
 
 ## Publish
