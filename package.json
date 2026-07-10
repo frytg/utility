@@ -8,7 +8,6 @@
 		"@std/fmt": "npm:@jsr/std__fmt@^1.0.10",
 		"@frytg/logger": "npm:@jsr/frytg__logger@^0.0.3",
 		"luxon": "^3.7.2",
-		"minio": "^8.0.7",
 		"sinon": "^22.0.0",
 		"tsx": "^4.19.3",
 		"winston": "^3.19.0"
