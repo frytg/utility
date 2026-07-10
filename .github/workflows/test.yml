@@ -19,7 +19,7 @@ permissions:
 env:
   NODE_ENV: production
   JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger"
-  NPM_DEPENDENCIES: "luxon minio sinon winston"
+  NPM_DEPENDENCIES: "luxon minio sinon winston tsx"
 
 jobs:
   test-on-deno-and-lint:
@@ -141,7 +141,7 @@ jobs:
         run: |
           $files = nubx -y glob "**/*.test.ts"
           foreach ($file in $files) {
-            nub --test $file
+            nubx tsx --test $file
           }
         shell: pwsh
 
