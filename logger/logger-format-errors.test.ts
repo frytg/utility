@@ -10,8 +10,8 @@ test('logger - formats errors correctly', () => {
 	const testError = new Error('test error')
 	const writeStub = sinon.stub(process.stdout, 'write')
 	let loggedOutput = ''
-	writeStub.callsFake((str: string) => {
-		loggedOutput = str
+	writeStub.callsFake((str: string | Uint8Array) => {
+		loggedOutput = typeof str === 'string' ? str : new TextDecoder().decode(str)
 		return true
 	})
 

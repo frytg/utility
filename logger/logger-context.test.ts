@@ -16,8 +16,8 @@ test('logger - includes global context in log events', () => {
 
 	const writeStub = sinon.stub(process.stdout, 'write')
 	let loggedOutput = ''
-	writeStub.callsFake((str: string) => {
-		loggedOutput = str
+	writeStub.callsFake((str: string | Uint8Array) => {
+		loggedOutput = typeof str === 'string' ? str : new TextDecoder().decode(str)
 		return true
 	})
 
