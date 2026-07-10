@@ -15,7 +15,7 @@
 		"exclude": ["**/*.md", "**/*.yml", "**/*.yaml"]
 	},
 	"tasks": {
-		"check": "deno fmt --check && deno lint && biome lint",
+		"check": "deno fmt --check && deno lint && deno run -A @biomejs/biome lint",
 		"dry-run": "deno publish --dry-run",
 		"test": "deno test --allow-sys --allow-env --clean --coverage",
 		"update": "deno outdated --update --latest --recursive"
@@ -34,10 +34,11 @@
 	},
 	"workspace": ["./check-required-env", "./crypto", "./dates", "./logger", "./storage-s3"],
 	"imports": {
-		"@biomejs/biome": "npm:@biomejs/biome@^2.5.1",
+		"@biomejs/biome": "npm:@biomejs/biome@^2.5.3",
 		"@types/node": "npm:@types/node@^26.0.1",
 		"@cross/test": "jsr:@cross/test@^0.0.14",
 		"@std/assert": "jsr:@std/assert@^1.0.19",
+		"@types/sinon": "npm:@types/sinon@^22.0.0",
 		"sinon": "npm:sinon@^22.0.0"
 	}
 }

@@ -18,8 +18,6 @@ permissions:
 
 env:
   NODE_ENV: production
-  JSR_DEPENDENCIES: "@cross/test @std/assert @std/fmt @frytg/logger"
-  NPM_DEPENDENCIES: "luxon minio sinon"
 
 jobs:
   test-on-deno-and-lint:
@@ -81,19 +79,16 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v7
 
+      - name: Set up Nub
+        uses: nubjs/setup-nub@v0
+
       - name: Setup Bun
         uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
-      - name: Bun version
-        run: bun --version
-
-      - name: Install JSR dependencies
-        run: bunx jsr add ${{ env.JSR_DEPENDENCIES }}
-
-      - name: Install NPM dependencies
-        run: bun add ${{ env.NPM_DEPENDENCIES }}
+      - name: Install dependencies
+        run: nub ci
 
       - name: Test
         run: bun test
@@ -105,9 +100,8 @@ jobs:
       fail-fast: false
       matrix:
         node-version:
-          - 20
-          - 22
-          - 23
+          - 26
+          - 24
         os:
           - ubuntu-24.04
           - ubuntu-24.04-arm
@@ -121,31 +115,21 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v7
 
-      - uses: actions/setup-node@v6
+      - uses: nubjs/setup-nub@v0
         with:
           node-version: ${{ matrix.node-version }}
 
-      - name: Node version
-        run: node --version
-
-      - name: Install JSR dependencies
-        run: npx jsr add ${{ env.JSR_DEPENDENCIES }}
-
-      - name: Install NPM dependencies
-        run: npm install ${{ env.NPM_DEPENDENCIES }}
-
-      - name: Set up package.json
-        run: 'echo ''{ "type": "module" }'' > package.json'
+      - name: Install dependencies
+        run: nub ci
 
       - name: Test (Windows)
         if: matrix.os == 'windows-latest'
         run: |
-          $files = npx --yes glob "**/*.test.ts"
-          foreach ($file in $files) {
-            npx tsx --test $file
+          Get-ChildItem -Recurse -Filter *.test.ts | ForEach-Object {
+            nubx tsx --test $_.FullName
           }
         shell: pwsh
 
       - name: Test (Linux/macOS)
         if: matrix.os != 'windows-latest'
-        run: npx --yes tsx --test **/*.test.ts
+        run: nubx tsx --test **/*.test.ts
