@@ -50,7 +50,7 @@ This uses [`@cross/test`](https://jsr.io/@cross/test) and [`sinon`](https://sino
 deno task test
 ```
 
-For Node.js and Bun, install dependencies with [Nub](https://nubjs.com/docs) and run the shared test script:
+For Node.js and Bun, install dependencies with [Nub](https://nubjs.com/docs) and run tests:
 
 ```bash
 nub install
