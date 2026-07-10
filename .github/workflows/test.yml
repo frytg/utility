@@ -131,7 +131,7 @@ jobs:
         run: nubx -y jsr add ${{ env.JSR_DEPENDENCIES }}
 
       - name: Install NPM dependencies
-        run: nub add ${{ env.NPM_DEPENDENCIES }}
+        run: npm install ${{ env.NPM_DEPENDENCIES }}
 
       - name: Set up package.json
         run: node -e "const fs=require('fs'); const pkg=JSON.parse(fs.readFileSync('package.json','utf8')); pkg.type='module'; fs.writeFileSync('package.json', JSON.stringify(pkg, null, 2) + '\n')"
