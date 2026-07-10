@@ -34,7 +34,7 @@ Other tools that I regularly use and don't feel the need to optimize or re-creat
 
 ## Lint
 
-Use `deno fmt`, `deno lint` and `biome lint` to check the code.
+Use `deno fmt`, `deno lint`, and `deno run -A @biomejs/biome lint` to check the code.
 
 ```bash
 deno task check

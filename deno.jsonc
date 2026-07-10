@@ -15,7 +15,7 @@
 		"exclude": ["**/*.md", "**/*.yml", "**/*.yaml"]
 	},
 	"tasks": {
-		"check": "deno fmt --check && deno lint && biome lint",
+		"check": "deno fmt --check && deno lint && deno run -A @biomejs/biome lint",
 		"dry-run": "deno publish --dry-run",
 		"test": "deno test --allow-sys --allow-env --clean --coverage",
 		"update": "deno outdated --update --latest --recursive"
