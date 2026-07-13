@@ -1,0 +1,18 @@
+# Spindle docs: https://docs.tangled.org/spindles#spindles
+
+when:
+  - event: ["push", "manual"]
+    branch: ["**"]
+
+engine: microvm
+image: alpine
+
+steps:
+  - name: "Install system deps"
+    command: apk add --no-cache bash curl just libstdc++ deno
+  - name: "Install dependencies"
+    command: deno install --vendor
+  - name: "Lint"
+    command: |
+      set -euo pipefail
+      just lint
