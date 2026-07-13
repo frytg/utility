@@ -1,0 +1,51 @@
+# Spindle docs: https://docs.tangled.org/spindles#spindles
+# Mirror pushes from Tangled to github.com/frytg/utility.
+# Add GITHUB_DEPLOY_KEY under Settings → Secrets and assign a spindle.
+
+when:
+  - event: ["push", "manual"]
+    branch: ["main"]
+
+engine: microvm
+image: nixos
+
+clone:
+  depth: 10
+
+dependencies:
+  - git
+  - openssh
+
+registry:
+  nixpkgs: github:nixos/nixpkgs/nixos-unstable
+
+environment:
+  GIT_REMOTE_REPO: "git@github.com:frytg/utility.git"
+
+steps:
+  - name: "Mirror to GitHub"
+    command: |
+      set -euo pipefail
+
+      if [ -z "${GITHUB_DEPLOY_KEY:-}" ]; then
+        echo "GITHUB_DEPLOY_KEY not set — skipping"
+        exit 0
+      fi
+
+      echo "TANGLED_REF_NAME: ${TANGLED_REF_NAME}"
+      echo "TANGLED_SHA: ${TANGLED_SHA}"
+      echo "HEAD: $(git rev-parse HEAD)"
+      echo "GIT_REMOTE_REPO: ${GIT_REMOTE_REPO}"
+
+      mkdir -p "$HOME/.ssh"
+      chmod 700 "$HOME/.ssh"
+      touch "$HOME/.ssh/known_hosts"
+
+      eval "$(ssh-agent -s)" > /dev/null
+      ssh-add - <<< "${GITHUB_DEPLOY_KEY}"
+      ssh-keyscan -t rsa,ed25519 github.com >> "$HOME/.ssh/known_hosts"
+
+      git config user.name "Daniel Freytag"
+      git config user.email "ci@frytg.digital"
+      git remote add mirror "${GIT_REMOTE_REPO}"
+      git push --force mirror "HEAD:refs/heads/${TANGLED_REF_NAME}"
