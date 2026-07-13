@@ -40,6 +40,68 @@ test('logger - includes global context in log events', () => {
 	envStub.restore()
 })
 
+test('logger - includes fly.io context in log events', () => {
+	// Setup
+	const envStub = sinon.stub(process, 'env').value({
+		FLY_MACHINE_ID: 'machine-abc123',
+		FLY_APP_NAME: 'my-fly-app',
+		FLY_REGION: 'ams',
+		STAGE: 'prod',
+	})
+
+	const writeStub = sinon.stub(process.stdout, 'write')
+	let loggedOutput = ''
+	writeStub.callsFake((str: string | Uint8Array) => {
+		loggedOutput = typeof str === 'string' ? str : new TextDecoder().decode(str)
+		return true
+	})
+
+	// Test
+	logger.info('test message', {
+		source: 'test-source',
+	})
+
+	// Verify
+	const loggedData = JSON.parse(loggedOutput)
+	assertEquals(loggedData.host, 'machine-abc123')
+	assertEquals(loggedData.serviceName, 'my-fly-app')
+	assertEquals(loggedData.region, 'ams')
+
+	// Cleanup
+	writeStub.restore()
+	envStub.restore()
+})
+
+test('logger - includes deno deploy context in log events', () => {
+	// Setup
+	const envStub = sinon.stub(process, 'env').value({
+		DENO_DEPLOYMENT_ID: 'deployment-xyz789',
+		DENO_REGION: 'gcp-europe-west3',
+		STAGE: 'prod',
+	})
+
+	const writeStub = sinon.stub(process.stdout, 'write')
+	let loggedOutput = ''
+	writeStub.callsFake((str: string | Uint8Array) => {
+		loggedOutput = typeof str === 'string' ? str : new TextDecoder().decode(str)
+		return true
+	})
+
+	// Test
+	logger.info('test message', {
+		source: 'test-source',
+	})
+
+	// Verify
+	const loggedData = JSON.parse(loggedOutput)
+	assertEquals(loggedData.host, 'deployment-xyz789')
+	assertEquals(loggedData.region, 'gcp-europe-west3')
+
+	// Cleanup
+	writeStub.restore()
+	envStub.restore()
+})
+
 test('logger - sets debug level correctly', () => {
 	// Test & Verify
 	assertEquals(logger.level, process.env.STAGE === 'dev' ? 'debug' : 'info')
