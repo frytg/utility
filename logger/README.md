@@ -15,22 +15,34 @@ Debug logs will only be logged if the env `STAGE` is set to `dev`.
 
 ## Usage
 
+### Server (Node.js, Deno, Bun)
+
 ```ts
 import logger from '@frytg/logger';
 ```
 
+### Browser
+
+Use the dedicated browser entry for frontend apps (Vue, React, etc.). It is a structured `console` replacement with the same call style as the server logger, without server deployment env injection.
+
 ```ts
-logger.log({
-  level: 'alert',
-  message: 'my log message',
-  source: 'folder-a/file-b/function-c',
-  data: { name: 'my-data' },
+import logger from '@frytg/logger/browser';
+
+logger.info('user signed in', {
+  source: 'components/LoginForm',
+  data: { method: 'oauth' },
 });
 ```
 
+In development builds (`import.meta.env.DEV` or `import.meta.env.MODE === 'development'`), debug logs are enabled and output is pretty-printed JSON. Production builds log `info` and above as compact JSON.
+
+The default `@frytg/logger` entry is server-only and will not bundle for browser targets.
+
 ## Configuration
 
-The logger accesses and injects several env variables to each log event (envs listed in order of priority):
+### Server
+
+The server logger accesses and injects several env variables to each log event (envs listed in order of priority):
 
 - `host` - the host name (e.g. `my-function`)
   - from env `K_REVISION` - set by Knative such as Google Cloud Run
@@ -64,6 +76,11 @@ Additionally these environment variables are triggering different logging format
 
 - `IS_LOCAL` - set to `true` to use a more human readable, colorized output format that uses multiple lines
 - `STAGE` - set to `dev` to enable debug logs
+
+### Browser
+
+- `import.meta.env.DEV` - Vite development builds enable debug logs and pretty-printed output
+- `import.meta.env.MODE` - `development` also enables debug logs and pretty-printed output
 
 ## Log Levels
 
