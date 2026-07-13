@@ -1,5 +1,5 @@
 # Spindle docs: https://docs.tangled.org/spindles#spindles
-# Mirror pushes from Tangled to github.com/frytg/utility.
+# Mirror pushes from Tangled to GitHub
 # Add GITHUB_DEPLOY_KEY under Settings → Secrets and assign a spindle.
 
 when:
