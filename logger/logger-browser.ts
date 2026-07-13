@@ -24,15 +24,18 @@ type LogMetadata = {
 	[key: string]: unknown
 }
 
-type LogEvent = LogMetadata & {
-	level: SyslogLevel
-	message: string
+type GlobalContext = {
 	host: string | null
 	serviceName: string | null
 	stage: string | null
 	version: string | null
 	region: string | null
 	runtime: string
+}
+
+type LogEvent = LogMetadata & GlobalContext & {
+	level: SyslogLevel
+	message: string
 	error?: {
 		message: string
 		stack?: string
@@ -114,16 +117,16 @@ const serializeError = (error: unknown): LogEvent['error'] | undefined => {
 	return {
 		...error,
 		message: error.message,
-		stack: error.stack,
+		...(error.stack !== undefined ? { stack: error.stack } : {}),
 	}
 }
 
 /**
  * Build global context fields injected into each log event.
  *
- * @returns {Omit<LogEvent, 'level' | 'message'>} Global log context.
+ * @returns {GlobalContext} Global log context.
  */
-const buildGlobalContext = (): Omit<LogEvent, 'level' | 'message'> => ({
+const buildGlobalContext = (): GlobalContext => ({
 	host: readEnv('K_REVISION') ??
 		readEnv('HOST') ??
 		(typeof globalThis.location !== 'undefined' ? globalThis.location.hostname : null),
@@ -183,8 +186,11 @@ const createBrowserLogger = (): BrowserLogger => {
 			const serializedError = serializeError(event.error)
 			const logEvent: LogEvent = {
 				...buildGlobalContext(),
-				...event,
-				...(serializedError ? { error: serializedError } : {}),
+				level: event.level,
+				message: event.message,
+				...(event.source !== undefined ? { source: event.source } : {}),
+				...(event.data !== undefined ? { data: event.data } : {}),
+				...(serializedError !== undefined ? { error: serializedError } : {}),
 			}
 
 			console[consoleMethodForLevel(event.level)](formatLogEvent(logEvent))
