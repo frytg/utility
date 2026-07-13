@@ -22,7 +22,7 @@ It is tested against Bun, Deno, and Node.js runtimes. Published on [jsr.io (`@fr
 Use `deno fmt`, `deno lint`, and `deno run -A @biomejs/biome lint` to check the code.
 
 ```bash
-deno task check
+just lint
 ```
 
 See [_Writing documentation_](https://jsr.io/docs/writing-docs) for details about writing JSDoc.
@@ -32,7 +32,7 @@ See [_Writing documentation_](https://jsr.io/docs/writing-docs) for details abou
 This uses [`@cross/test`](https://jsr.io/@cross/test) and [`sinon`](https://sinonjs.org) to run the tests.
 
 ```bash
-deno task test
+just test
 ```
 
 For Node.js and Bun, install dependencies with [Nub](https://nubjs.com/docs) and run tests:

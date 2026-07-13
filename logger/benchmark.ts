@@ -27,7 +27,7 @@ type BenchCase = {
  *
  * @returns restore function
  */
-const silenceStdout = (): () => void => {
+const silenceStdout = (): (() => void) => {
 	const originalWrite = process.stdout.write.bind(process.stdout)
 	process.stdout.write = (() => true) as typeof process.stdout.write
 	return () => {

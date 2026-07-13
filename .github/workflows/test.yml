@@ -44,17 +44,20 @@ jobs:
         with:
           deno-version: canary
 
+      - name: Set up Just
+        uses: extractions/setup-just@v2
+
       - name: Deno version
         run: deno --version
 
       - name: Install dependencies
         run: deno install --vendor
 
-      - name: Format & Check
-        run: deno run check
+      - name: Lint
+        run: just lint
 
       - name: Test
-        run: deno run test
+        run: just test
 
       - name: Publish dry run
         run: deno publish --dry-run
