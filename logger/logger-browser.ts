@@ -1,7 +1,7 @@
 // deno-lint-ignore-file no-console
 /**
  * @module
- * A browser-safe logger with the same log event shape as `@frytg/logger`.
+ * A browser-safe structured console logger for frontend apps.
  */
 
 const SYSLOG_LEVELS = {
@@ -24,16 +24,7 @@ type LogMetadata = {
 	[key: string]: unknown
 }
 
-type GlobalContext = {
-	host: string | null
-	serviceName: string | null
-	stage: string | null
-	version: string | null
-	region: string | null
-	runtime: string
-}
-
-type LogEvent = LogMetadata & GlobalContext & {
+type LogEvent = LogMetadata & {
 	level: SyslogLevel
 	message: string
 	error?: {
@@ -51,59 +42,24 @@ type BrowserLogger = {
 	log: (event: LogMetadata & { level: SyslogLevel; message: string }) => void
 } & Record<SyslogLevel, (message: string, meta?: LogMetadata) => void>
 
-let cachedBrowserRuntime: string | undefined
-
 /**
- * Read a configuration value from browser-safe environment sources.
+ * Determine whether the app is running in development mode.
  *
- * @param {string} key - Environment variable name.
- * @returns {string | undefined} The value when present.
+ * @returns {boolean} True when running in a development build.
  */
-const readEnv = (key: string): string | undefined => {
+const isDev = (): boolean => {
 	const metaEnv = (import.meta as ImportMeta & { env?: ImportMetaEnv }).env
-	const metaValue = metaEnv?.[key]
-	if (typeof metaValue === 'string' && metaValue !== '') return metaValue
-
-	const globalEnv = (globalThis as { __ENV__?: Record<string, string> }).__ENV__
-	const globalValue = globalEnv?.[key]
-	if (globalValue !== undefined && globalValue !== '') return globalValue
-
-	return undefined
+	if (metaEnv?.DEV === true) return true
+	if (metaEnv?.MODE === 'development') return true
+	return false
 }
 
 /**
- * Detect and return the browser runtime label.
- *
- * @returns {string} A browser runtime identifier.
- */
-export const detectBrowserRuntime = (): string => {
-	if (cachedBrowserRuntime !== undefined) return cachedBrowserRuntime
-
-	if (typeof navigator !== 'undefined' && navigator.userAgent) {
-		cachedBrowserRuntime = `browser-${navigator.userAgent}`
-	} else {
-		cachedBrowserRuntime = 'browser-unknown'
-	}
-
-	return cachedBrowserRuntime
-}
-
-/**
- * Resolve the minimum log level from environment configuration.
+ * Resolve the minimum log level for the current build.
  *
  * @returns {SyslogLevel} The configured minimum log level.
  */
-const resolveMinLevel = (): SyslogLevel => {
-	const stage = readEnv('STAGE') ?? readEnv('NODE_ENV') ?? readEnv('MODE') ?? readEnv('VITE_STAGE')
-	return stage === 'dev' ? 'debug' : 'info'
-}
-
-/**
- * Determine whether local, colorized output should be used.
- *
- * @returns {boolean} True when local output is enabled.
- */
-const isLocalOutput = (): boolean => readEnv('IS_LOCAL') === 'true' || readEnv('DEV') === 'true'
+const resolveMinLevel = (): SyslogLevel => isDev() ? 'debug' : 'info'
 
 /**
  * Serialize an error for structured logging.
@@ -120,24 +76,6 @@ const serializeError = (error: unknown): LogEvent['error'] | undefined => {
 		...(error.stack !== undefined ? { stack: error.stack } : {}),
 	}
 }
-
-/**
- * Build global context fields injected into each log event.
- *
- * @returns {GlobalContext} Global log context.
- */
-const buildGlobalContext = (): GlobalContext => ({
-	host: readEnv('K_REVISION') ??
-		readEnv('HOST') ??
-		(typeof globalThis.location !== 'undefined' ? globalThis.location.hostname : null),
-	serviceName: readEnv('SERVICE_NAME') ?? readEnv('K_SERVICE') ?? readEnv('VITE_SERVICE_NAME') ?? null,
-	stage: readEnv('STAGE') ?? readEnv('NODE_ENV') ?? readEnv('MODE') ?? readEnv('VITE_STAGE') ?? null,
-	version: readEnv('SERVICE_VERSION') ?? readEnv('npm_package_version') ?? readEnv('VITE_SERVICE_VERSION') ??
-		null,
-	region: readEnv('REGION') ?? readEnv('AWS_REGION') ?? readEnv('FLY_REGION') ?? readEnv('DENO_REGION') ??
-		null,
-	runtime: detectBrowserRuntime(),
-})
 
 /**
  * Determine whether a log event should be emitted for the configured level.
@@ -163,13 +101,12 @@ const consoleMethodForLevel = (level: SyslogLevel): 'debug' | 'error' | 'log' | 
 }
 
 /**
- * Format a log event for output.
+ * Format a log event for console output.
  *
  * @param {LogEvent} event - The structured log event.
  * @returns {string} Serialized log output.
  */
-const formatLogEvent = (event: LogEvent): string =>
-	isLocalOutput() ? JSON.stringify(event, null, 4) : JSON.stringify(event)
+const formatLogEvent = (event: LogEvent): string => isDev() ? JSON.stringify(event, null, 4) : JSON.stringify(event)
 
 /**
  * Create a browser-safe logger with syslog levels and structured JSON output.
@@ -185,7 +122,6 @@ const createBrowserLogger = (): BrowserLogger => {
 
 			const serializedError = serializeError(event.error)
 			const logEvent: LogEvent = {
-				...buildGlobalContext(),
 				level: event.level,
 				message: event.message,
 				...(event.source !== undefined ? { source: event.source } : {}),
@@ -213,11 +149,9 @@ const createBrowserLogger = (): BrowserLogger => {
  * ```ts
  * import logger from '@frytg/logger/browser'
  *
- * logger.log({
- *   level: 'debug',
- *   message: 'my log message',
- *   source: 'folder-a/file-b/function-c',
- *   data: { name: 'my-data' },
+ * logger.info('my log message', {
+ *   source: 'components/MyComponent',
+ *   data: { userId: '123' },
  * })
  * ```
  */

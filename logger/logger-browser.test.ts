@@ -2,25 +2,9 @@ import { test } from '@cross/test'
 import { assertEquals, assertExists } from '@std/assert'
 import sinon from 'sinon'
 
-import { detectBrowserRuntime, logger } from './logger-browser.ts'
+import { logger } from './logger-browser.ts'
 
-test('detectBrowserRuntime - returns the same value on repeated calls', () => {
-	const first = detectBrowserRuntime()
-	const second = detectBrowserRuntime()
-
-	assertEquals(second, first)
-})
-
-test('logger browser - includes global context in log events', () => {
-	const globalScope = globalThis as { __ENV__?: Record<string, string> }
-	const previousEnv = globalScope.__ENV__
-	globalScope.__ENV__ = {
-		K_REVISION: 'test-revision',
-		SERVICE_NAME: 'test-service',
-		STAGE: 'test',
-		npm_package_version: '1.0.0',
-	}
-
+test('logger browser - logs structured event fields', () => {
 	const consoleStub = sinon.stub(console, 'log')
 	let loggedOutput = ''
 	consoleStub.callsFake((output: string) => {
@@ -33,18 +17,13 @@ test('logger browser - includes global context in log events', () => {
 	})
 
 	const loggedData = JSON.parse(loggedOutput)
-	assertEquals(loggedData.host, 'test-revision')
-	assertEquals(loggedData.serviceName, 'test-service')
-	assertEquals(loggedData.stage, 'test')
-	assertEquals(loggedData.version, '1.0.0')
-	assertExists(loggedData.runtime)
+	assertEquals(loggedData.message, 'test message')
+	assertEquals(loggedData.level, 'info')
+	assertEquals(loggedData.source, 'test-source')
+	assertEquals(loggedData.data, { test: 'data' })
+	assertEquals(loggedData.host, undefined)
 
 	consoleStub.restore()
-	if (previousEnv === undefined) {
-		delete globalScope.__ENV__
-	} else {
-		globalScope.__ENV__ = previousEnv
-	}
 })
 
 test('logger browser - formats errors correctly', () => {
@@ -64,7 +43,6 @@ test('logger browser - formats errors correctly', () => {
 	assertExists(loggedData.error.message)
 	assertExists(loggedData.error.stack)
 	assertEquals(loggedData.error.message, 'test error')
-	assertExists(loggedData.runtime)
 
 	consoleStub.restore()
 })
@@ -84,9 +62,8 @@ test('logger browser - has correct syslog levels', () => {
 	assertEquals(logger.levels, expectedLevels)
 })
 
-test('logger browser - sets debug level from environment', () => {
-	const stage = (globalThis as { __ENV__?: Record<string, string> }).__ENV__?.STAGE
-	assertEquals(logger.level, stage === 'dev' ? 'debug' : 'info')
+test('logger browser - sets debug level in development builds', () => {
+	assertEquals(logger.level, isDevBuild() ? 'debug' : 'info')
 })
 
 test('logger browser - does not log below configured level', () => {
@@ -98,3 +75,15 @@ test('logger browser - does not log below configured level', () => {
 	assertEquals(consoleStub.called, false)
 	consoleStub.restore()
 })
+
+/**
+ * Mirror the browser logger development-mode check for assertions.
+ *
+ * @returns {boolean} True when the current build is development.
+ */
+const isDevBuild = (): boolean => {
+	const metaEnv = (import.meta as ImportMeta & { env?: Record<string, string | boolean | undefined> }).env
+	if (metaEnv?.DEV === true) return true
+	if (metaEnv?.MODE === 'development') return true
+	return false
+}
