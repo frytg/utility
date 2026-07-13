@@ -17,21 +17,6 @@ It is tested against Bun, Deno, and Node.js runtimes. Published on [jsr.io (`@fr
 - [`@frytg/dates`](./dates/README.md) - Date utilities around Luxon
 - [`@frytg/logger`](./logger/README.md) - Pre-configuredWinston logging wrapper
 
-## More Tooling
-
-Planned for this utility package:
-
-- `hashes` - sha256, sha512, etc.
-
-Other tools that I regularly use and don't feel the need to optimize or re-create in this utility package:
-
-- [`axios`](https://github.com/axios/axios) - _Promise based HTTP client for the browser and node.js_
-- [`hono`](https://jsr.io/@hono/hono) - _small, simple, and ultrafast web framework built on Web Standards_
-- [`undici`](https://github.com/nodejs/undici) - _performant HTTP/1.1 client for Node.js_
-- [`@upstash/redis`](https://github.com/upstash/redis-js) for HTTP redis and [`redis`](https://github.com/redis/node-redis) for TCP
-- [`tailwindcss`](https://tailwindcss.com/docs/installation) - _CSS framework for rapid UI development_
-- [`@turf/turf`](https://github.com/Turfjs/turf) _for anything geospatial_
-
 ## Lint
 
 Use `deno fmt`, `deno lint`, and `deno run -A @biomejs/biome lint` to check the code.
@@ -74,4 +59,4 @@ Created by [@frytg](https://github.com/frytg) / [frytg.digital](https://www.fryt
 
 ## License
 
-[Unlicense](./LICENSE) - also see [unlicense.org](https://unlicense.org)
+[MIT](./LICENSE)

@@ -19,4 +19,4 @@ Created by [@frytg](https://github.com/frytg) / [frytg.digital](https://www.fryt
 
 ## License
 
-[Unlicense](https://github.com/frytg/utility/blob/main/LICENSE) - also see [unlicense.org](https://unlicense.org)
+[MIT](https://github.com/frytg/utility/blob/main/LICENSE)

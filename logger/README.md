@@ -15,30 +15,45 @@ Debug logs will only be logged if the env `STAGE` is set to `dev`.
 
 ## Usage
 
+### Server (Node.js, Deno, Bun)
+
 ```ts
 import logger from '@frytg/logger';
 ```
 
+### Browser
+
+Use the dedicated browser entry for frontend apps (Vue, React, etc.). It is a structured `console` replacement with the same call style as the server logger, without server deployment env injection.
+
 ```ts
-logger.log({
-  level: 'alert',
-  message: 'my log message',
-  source: 'folder-a/file-b/function-c',
-  data: { name: 'my-data' },
+import logger from '@frytg/logger/browser';
+
+logger.info('user signed in', {
+  source: 'components/LoginForm',
+  data: { method: 'oauth' },
 });
 ```
 
+In development builds (`import.meta.env.DEV` or `import.meta.env.MODE === 'development'`), debug logs are enabled and output is pretty-printed JSON. Production builds log `info` and above as compact JSON.
+
+The default `@frytg/logger` entry is server-only and will not bundle for browser targets.
+
 ## Configuration
 
-The logger accesses and injects several env variables to each log event (envs listed in order of priority):
+### Server
+
+The server logger accesses and injects several env variables to each log event (envs listed in order of priority):
 
 - `host` - the host name (e.g. `my-function`)
   - from env `K_REVISION` - set by Knative such as Google Cloud Run
-  - from env`AWS_LAMBDA_FUNCTION_NAME` - set by AWS Lambda
+  - from env `AWS_LAMBDA_FUNCTION_NAME` - set by AWS Lambda
+  - from env `FLY_MACHINE_ID` - set by [Fly.io Machines](https://fly.io/docs/reference/runtime-environment/)
+  - from env `DENO_DEPLOYMENT_ID` - set by [Deno Deploy](https://docs.deno.com/deploy/manual/environment-variables/)
   - from `os.hostname()` - fallback
 - `serviceName` - the service name (e.g. `my-service`)
   - from env `SERVICE_NAME` - set by your deployment
   - from env `K_SERVICE` - set by Knative such as Google Cloud Run
+  - from env `FLY_APP_NAME` - set by [Fly.io Machines](https://fly.io/docs/reference/runtime-environment/)
 - `stage` - the stage (e.g. `dev`)
   - from env `STAGE` - set by your deployment
   - from env `NODE_ENV` - set by your deployment
@@ -48,9 +63,12 @@ The logger accesses and injects several env variables to each log event (envs li
 - `region` - the region (e.g. `eu-west-1`)
   - from env `REGION` - set by your deployment
   - from env `AWS_REGION` - set by AWS Lambda
+  - from env `FLY_REGION` - set by [Fly.io Machines](https://fly.io/docs/reference/runtime-environment/)
+  - from env `DENO_REGION` - set by [Deno Deploy](https://docs.deno.com/deploy/manual/environment-variables/)
 - `runtime` - the runtime (e.g. `nodejs-20.11.0`)
   - from `process.versions.bun` - set by Bun
   - from `process.versions.deno` - set by Deno
+  - from env `DENO_DEPLOYMENT_ID` with Deno - set by [Deno Deploy](https://docs.deno.com/deploy/manual/environment-variables/) (e.g. `deno-deploy-1.3.2`)
   - from env `AWS_EXECUTION_ENV` - set by AWS Lambda
   - from `process.version` - fallback (usually Node.js)
 
@@ -58,6 +76,11 @@ Additionally these environment variables are triggering different logging format
 
 - `IS_LOCAL` - set to `true` to use a more human readable, colorized output format that uses multiple lines
 - `STAGE` - set to `dev` to enable debug logs
+
+### Browser
+
+- `import.meta.env.DEV` - Vite development builds enable debug logs and pretty-printed output
+- `import.meta.env.MODE` - `development` also enables debug logs and pretty-printed output
 
 ## Log Levels
 
@@ -83,4 +106,4 @@ Created by [@frytg](https://github.com/frytg) / [frytg.digital](https://www.fryt
 
 ## License
 
-[Unlicense](https://github.com/frytg/utility/blob/main/LICENSE) - also see [unlicense.org](https://unlicense.org)
+[MIT](https://github.com/frytg/utility/blob/main/LICENSE)

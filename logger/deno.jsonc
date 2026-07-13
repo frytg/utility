@@ -1,8 +1,11 @@
 {
 	"$schema": "https://jsr.io/schema/config-file.v1.json",
 	"name": "@frytg/logger",
-	"version": "0.0.3",
-	"exports": "./logger.ts",
+	"version": "0.1.0",
+	"exports": {
+		".": "./logger.ts",
+		"./browser": "./logger-browser.ts"
+	},
 	"imports": {
 		"winston": "npm:winston@^3.19.0"
 	},
