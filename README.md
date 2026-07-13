@@ -19,7 +19,7 @@ It is tested against Bun, Deno, and Node.js runtimes. Published on [jsr.io (`@fr
 
 ## Lint
 
-Use `deno fmt`, `deno lint`, and `deno run -A @biomejs/biome lint` to check the code.
+Uses Biome to check the code.
 
 ```bash
 just lint

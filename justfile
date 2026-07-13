@@ -12,8 +12,6 @@ bench-logger:
 	deno run bench-logger
 
 lint:
-	deno fmt --check
-	deno lint
 	deno run -A @biomejs/biome lint
 
 format:

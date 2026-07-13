@@ -7,29 +7,10 @@
 		"noUncheckedIndexedAccess": true
 	},
 	"exclude": [".git", ".github", "vendor"],
-	"fmt": {
-		"useTabs": true,
-		"lineWidth": 120,
-		"semiColons": false,
-		"singleQuote": true,
-		"exclude": ["**/*.md", "**/*.yml", "**/*.yaml"]
-	},
 	"tasks": {
 		"bench-logger": "deno run -A logger/benchmark.ts",
 		"dry-run": "deno publish --dry-run",
 		"update": "deno outdated --update --latest --recursive"
-	},
-	"lint": {
-		"rules": {
-			"include": [
-				"camelcase",
-				"no-sync-fn-in-async-fn",
-				"single-var-declarator",
-				"verbatim-module-syntax",
-				"no-console"
-			]
-		},
-		"exclude": ["**/*.md", "**/*.yml", "**/*.yaml"]
 	},
 	"workspace": ["./check-required-env", "./crypto", "./dates", "./logger"],
 	"imports": {
