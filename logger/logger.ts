@@ -7,19 +7,19 @@
 import os from 'node:os'
 import process from 'node:process'
 import type { Logform, Logger } from 'winston'
-import { config, createLogger, format, transports } from 'winston'
+import { createLogger, format, transports } from 'winston'
+
+import { serializeError } from './serialize-error.ts'
+import { SYSLOG_LEVELS } from './syslog-levels.ts'
 
 // set config once
 const hostName = os.hostname()
 
 // Format error objects
 const convertError = format((event) => {
-	if (event?.error instanceof Error) {
-		event.error = {
-			...event.error,
-			message: event.error.message,
-			stack: event.error.stack,
-		}
+	const serializedError = serializeError(event?.error)
+	if (serializedError !== undefined) {
+		event.error = serializedError
 	}
 	return event
 })
@@ -115,7 +115,7 @@ const formatConfigLocal: Logform.Format = format.combine(
  */
 export const logger: Logger = createLogger({
 	level: process.env.STAGE === 'dev' ? 'debug' : 'info',
-	levels: config.syslog.levels,
+	levels: SYSLOG_LEVELS,
 	exitOnError: false,
 	format: process.env.IS_LOCAL === 'true' ? formatConfigLocal : formatConfig,
 	transports: [new transports.Console()],

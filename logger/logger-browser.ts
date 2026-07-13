@@ -4,18 +4,8 @@
  * A browser-safe structured console logger for frontend apps.
  */
 
-const SYSLOG_LEVELS = {
-	emerg: 0,
-	alert: 1,
-	crit: 2,
-	error: 3,
-	warning: 4,
-	notice: 5,
-	info: 6,
-	debug: 7,
-} as const
-
-type SyslogLevel = keyof typeof SYSLOG_LEVELS
+import { type SerializedError, serializeError } from './serialize-error.ts'
+import { shouldLog, SYSLOG_LEVELS, type SyslogLevel } from './syslog-levels.ts'
 
 type LogMetadata = {
 	source?: string
@@ -27,11 +17,7 @@ type LogMetadata = {
 type LogEvent = LogMetadata & {
 	level: SyslogLevel
 	message: string
-	error?: {
-		message: string
-		stack?: string
-		[key: string]: unknown
-	}
+	error?: SerializedError
 }
 
 type ImportMetaEnv = Record<string, string | boolean | undefined>
@@ -60,32 +46,6 @@ const isDev = (): boolean => {
  * @returns {SyslogLevel} The configured minimum log level.
  */
 const resolveMinLevel = (): SyslogLevel => isDev() ? 'debug' : 'info'
-
-/**
- * Serialize an error for structured logging.
- *
- * @param {unknown} error - The error value to serialize.
- * @returns {LogEvent['error'] | undefined} Serialized error fields.
- */
-const serializeError = (error: unknown): LogEvent['error'] | undefined => {
-	if (!(error instanceof Error)) return undefined
-
-	return {
-		...error,
-		message: error.message,
-		...(error.stack !== undefined ? { stack: error.stack } : {}),
-	}
-}
-
-/**
- * Determine whether a log event should be emitted for the configured level.
- *
- * @param {SyslogLevel} eventLevel - The event severity.
- * @param {SyslogLevel} configuredLevel - The configured minimum level.
- * @returns {boolean} True when the event should be logged.
- */
-const shouldLog = (eventLevel: SyslogLevel, configuredLevel: SyslogLevel): boolean =>
-	SYSLOG_LEVELS[eventLevel] <= SYSLOG_LEVELS[configuredLevel]
 
 /**
  * Select the console method that best matches a syslog level.
