@@ -15,9 +15,21 @@ Debug logs will only be logged if the env `STAGE` is set to `dev`.
 
 ## Usage
 
+### Server (Node.js, Deno, Bun)
+
 ```ts
 import logger from '@frytg/logger';
 ```
+
+### Browser
+
+Use the dedicated browser entry. It avoids Node built-ins and Winston, outputs structured JSON via `console`, and keeps the same log event shape.
+
+```ts
+import logger from '@frytg/logger/browser';
+```
+
+The default `@frytg/logger` entry is server-only and will not bundle for browser targets.
 
 ```ts
 logger.log({
