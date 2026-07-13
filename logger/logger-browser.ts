@@ -215,6 +215,6 @@ const createBrowserLogger = (): BrowserLogger => {
  * })
  * ```
  */
-export const logger = createBrowserLogger()
+export const logger: BrowserLogger = createBrowserLogger()
 
 export default logger
