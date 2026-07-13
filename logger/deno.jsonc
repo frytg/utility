@@ -7,6 +7,6 @@
 		"winston": "npm:winston@^3.19.0"
 	},
 	"publish": {
-		"exclude": ["*.test.ts"]
+		"exclude": ["*.test.ts", "benchmark.ts"]
 	}
 }

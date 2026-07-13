@@ -7,3 +7,6 @@ update:
 
 test:
 	deno run test
+
+bench-logger:
+	deno run bench-logger

@@ -15,6 +15,7 @@
 		"exclude": ["**/*.md", "**/*.yml", "**/*.yaml"]
 	},
 	"tasks": {
+		"bench-logger": "deno run -A logger/benchmark.ts",
 		"check": "deno fmt --check && deno lint && deno run -A @biomejs/biome lint",
 		"dry-run": "deno publish --dry-run",
 		"test": "deno test --allow-sys --allow-env --clean --coverage",
