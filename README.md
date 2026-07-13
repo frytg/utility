@@ -6,7 +6,7 @@
 
 A collection of utilities for TypeScript and JavaScript.
 
-This repository is work in progress.
+The primary repository lives on [tangled.org](https://tangled.org/frytg.digital/utility), which gets synced to [github.com](https://github.com/frytg/utility).
 
 It is tested against Bun, Deno, and Node.js runtimes. Published on [jsr.io (`@frytg`)](https://jsr.io/@frytg).
 
