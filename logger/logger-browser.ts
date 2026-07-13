@@ -45,7 +45,7 @@ const isDev = (): boolean => {
  *
  * @returns {SyslogLevel} The configured minimum log level.
  */
-const resolveMinLevel = (): SyslogLevel => isDev() ? 'debug' : 'info'
+const resolveMinLevel = (): SyslogLevel => (isDev() ? 'debug' : 'info')
 
 /**
  * Select the console method that best matches a syslog level.
@@ -66,7 +66,7 @@ const consoleMethodForLevel = (level: SyslogLevel): 'debug' | 'error' | 'log' | 
  * @param {LogEvent} event - The structured log event.
  * @returns {string} Serialized log output.
  */
-const formatLogEvent = (event: LogEvent): string => isDev() ? JSON.stringify(event, null, 4) : JSON.stringify(event)
+const formatLogEvent = (event: LogEvent): string => (isDev() ? JSON.stringify(event, null, 4) : JSON.stringify(event))
 
 /**
  * Create a browser-safe logger with syslog levels and structured JSON output.

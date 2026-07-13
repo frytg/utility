@@ -53,7 +53,8 @@ const processRuntime = detectProcessVersion()
 
 // Add global context to log events
 const convertGlobals = format((event) => {
-	event.host = process.env.K_REVISION ||
+	event.host =
+		process.env.K_REVISION ||
 		process.env.AWS_LAMBDA_FUNCTION_NAME ||
 		process.env.FLY_MACHINE_ID ||
 		process.env.DENO_DEPLOYMENT_ID ||
@@ -61,8 +62,8 @@ const convertGlobals = format((event) => {
 	event.serviceName = process.env.SERVICE_NAME || process.env.K_SERVICE || process.env.FLY_APP_NAME || null
 	event.stage = process.env.STAGE || process.env.NODE_ENV || null
 	event.version = process.env.SERVICE_VERSION || process.env.npm_package_version
-	event.region = process.env.REGION || process.env.AWS_REGION || process.env.FLY_REGION || process.env.DENO_REGION ||
-		null
+	event.region =
+		process.env.REGION || process.env.AWS_REGION || process.env.FLY_REGION || process.env.DENO_REGION || null
 	event.runtime = processRuntime
 	return event
 })
