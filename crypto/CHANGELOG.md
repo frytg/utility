@@ -1,5 +1,11 @@
 # Crypto Changelog
 
+## 2026-09-09 - 0.1.1
+
+- fix: properly validate hmac strings
+- fix: unhandled rejections for invalid base64
+- fix: docs and exports
+
 ## 2024-12-17 - 0.1.0
 
 - feat: add `bufferFromBase64`

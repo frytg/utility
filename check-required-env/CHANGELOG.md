@@ -1,5 +1,9 @@
 # Check Required Env Changelog
 
+## 2026-09-09 - 0.3.0
+
+- feat: added more tests for `exitWithError`
+
 ## 2025-01-22 - 0.2.0
 
 - feat: add `exitWithError`

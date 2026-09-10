@@ -1,5 +1,10 @@
 # Logger Changelog
 
+## 2026-09-09 - 0.2.0
+
+- feat: added benchmark script (`just bench-logger`)
+- fix: biome lint nits in server and browser loggers
+
 ## 2026-07-13 - 0.1.0
 
 - feat: added `@frytg/logger/browser` entry for frontend apps as a structured `console` replacement

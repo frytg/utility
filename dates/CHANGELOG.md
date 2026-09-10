@@ -1,5 +1,10 @@
 # Dates Changelog
 
+## 2026-09-09 - 0.3.1
+
+- chore: updated dependencies
+- docs: refreshed license header
+
 ## 2025-05-05 - 0.3.0
 
 - feat: add `prefer24h` to `getFullRelativeTime` and `getDateHourMinutes`
