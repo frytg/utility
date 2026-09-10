@@ -11,7 +11,7 @@ steps:
   - name: "Install mise"
     command: |
       apk add --no-cache bash curl
-      curl -fsSL https://github.com/jdx/mise/releases/latest/download/mise-latest-linux-x64-musl.tar.gz | tar -xz -C /usr/local/bin
+      curl -fsSL https://mise.run | sh
       mise --version
   - name: "Install dependencies"
     command: mise install
