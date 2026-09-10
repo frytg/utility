@@ -15,5 +15,5 @@ lint:
 	deno run -A oxlint
 
 format:
-	nubx oxlint --fix
-	nubx oxfmt
+	bunx oxlint --fix
+	bunx oxfmt

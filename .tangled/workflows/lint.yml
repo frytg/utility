@@ -8,11 +8,14 @@ engine: microvm
 image: alpine
 
 steps:
-  - name: "Install system deps"
-    command: apk add --no-cache bash curl just libstdc++ deno
+  - name: "Install mise"
+    command: |
+      apk add --no-cache bash curl
+      curl -fsSL https://github.com/jdx/mise/releases/latest/download/mise-latest-linux-x64-musl.tar.gz | tar -xz -C /usr/local/bin
+      mise --version
   - name: "Install dependencies"
-    command: deno install --vendor
+    command: mise install
   - name: "Lint"
     command: |
       set -euo pipefail
-      just lint
+      mise exec -- just lint

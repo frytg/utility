@@ -39,16 +39,8 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v7
 
-      - name: Set up Deno
-        uses: denoland/setup-deno@v2
-        with:
-          deno-version: canary
-
-      - name: Set up Just
-        uses: extractions/setup-just@v2
-
-      - name: Deno version
-        run: deno --version
+      - name: Set up mise
+        uses: jdx/mise-action@v2
 
       - name: Install dependencies
         run: deno install --vendor
@@ -82,16 +74,11 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v7
 
-      - name: Set up Nub
-        uses: nubjs/setup-nub@v0
-
-      - name: Setup Bun
-        uses: oven-sh/setup-bun@v2
-        with:
-          bun-version: latest
+      - name: Set up mise
+        uses: jdx/mise-action@v2
 
       - name: Install dependencies
-        run: nub ci
+        run: bun install --frozen-lockfile
 
       - name: Test
         run: bun test
@@ -118,21 +105,23 @@ jobs:
       - name: Clone repository
         uses: actions/checkout@v7
 
-      - uses: nubjs/setup-nub@v0
-        with:
-          node-version: ${{ matrix.node-version }}
+      - name: Set up mise
+        uses: jdx/mise-action@v2
+
+      - name: Use matrix node version
+        run: mise use --quiet node@${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: nub ci
+        run: bun install --frozen-lockfile
 
       - name: Test (Windows)
         if: matrix.os == 'windows-latest'
         run: |
           Get-ChildItem -Recurse -Filter *.test.ts | ForEach-Object {
-            nubx tsx --test $_.FullName
+            bunx tsx --test $_.FullName
           }
         shell: pwsh
 
       - name: Test (Linux/macOS)
         if: matrix.os != 'windows-latest'
-        run: nubx tsx --test **/*.test.ts
+        run: bunx tsx --test **/*.test.ts

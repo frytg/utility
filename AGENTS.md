@@ -12,25 +12,26 @@ This rule applies even when the change looks safe, the tests pass, and the commi
 
 - Root `deno.jsonc` declares four workspaces: `./check-required-env`, `./crypto`, `./dates`, `./logger`.
 - Each workspace ships its own `deno.jsonc` with `name`, `version`, `exports`, `imports`, and `publish.exclude`. Tests (`*.test.ts`) are always excluded from publish; `logger` also excludes `benchmark.ts`.
-- Lockfiles (`deno.lock`, `nub.lock`) are committed and reviewed. No floating `latest` in CI.
+- Lockfiles (`deno.lock`, `bun.lock`) are committed and reviewed. No floating `latest` in CI.
 
 ## Tooling
 
+- **Toolchain:** mise (`mise.toml`) pins node `26`, deno `canary`, bun `latest`, just `latest`. All four runtimes are installed locally by `mise install` and on CI by `jdx/mise-action@v2`.
 - **Linter / formatter:** oxlint + oxfmt. Driven by `just lint` and `just format`; config in `.oxlintrc.json` + `.oxfmtrc.json`. Tabs, single quotes, 120 cols, trailing commas, semicolons as needed.
 - **Task runner:** `just` (`justfile`). Recipes: `test`, `lint`, `format`, `update`, `bench-logger`.
-- **Package manager:** Nub (`nub@0.4.7` pinned in `package.json#packageManager`). `.npmrc` routes the `@jsr:` scope through `https://npm.jsr.io`. Node version pinned to `26` via `.node-version`.
-- **Deno:** vendored install (`deno install --vendor`), `deno test`, and `deno publish`. Pinned to `canary` in CI.
+- **Node packages:** `bun install` reads `package.json` + `bun.lock` and writes `node_modules`. `.npmrc` routes the `@jsr:` scope through `https://npm.jsr.io` so JSR packages resolve.
+- **Deno:** vendored install (`deno install --vendor`), `deno test`, and `deno publish`.
 - **Test framework:** `@cross/test` + `@std/assert` + `sinon`. Tests are runtime-agnostic — no `bun:test`, `node:test`, or Jest globals. Stub `process` / `os` with `sinon` instead of importing `bun:test` mocks.
 
 ## Daily commands
 
 - `just lint` — oxlint across the whole tree.
 - `just test` — `deno test --allow-sys --allow-env --clean --coverage`.
-- `just format` — `nubx oxlint --fix && nubx oxfmt`.
+- `just format` — `bunx oxlint --fix && bunx oxfmt`.
 - `just update` — `deno outdated --update --latest --recursive` to refresh JSR/NPM dep versions.
 - `just bench-logger` — run the logger micro-bench.
-- `nub ci && bun test` — Bun smoke (CI only; no `node_modules` is shipped).
-- `nub ci && nubx tsx --test '**/*.test.ts'` — Node smoke (CI).
+- `bun install --frozen-lockfile && bun test` — Bun smoke (CI only; no `node_modules` is shipped).
+- `bun install --frozen-lockfile && bunx tsx --test '**/*.test.ts'` — Node smoke (CI).
 - `deno publish --dry-run` — preview a JSR release locally before cutting.
 
 ## Code style
@@ -53,7 +54,7 @@ This rule applies even when the change looks safe, the tests pass, and the commi
 ## CI branches
 
 - GitHub Actions (`test.yml`) trigger on `push` to `main`, `dev/*`, `chore/*`, `feature/*` and on `pull_request` to `main`.
-- Tangled Spindles run on `push` to any branch (`.tangled/workflows/lint.yml` alpine microvm runs `just lint`) and on `main` (`.tangled/workflows/github-mirror.yml` nixos microvm mirrors to GitHub).
+- Tangled Spindles run on `push` to any branch (`.tangled/workflows/lint.yml` alpine microvm installs mise via the musl tarball, then `mise install` + `just lint`) and on `main` (`.tangled/workflows/github-mirror.yml` nixos microvm mirrors to GitHub).
 - Match the branch prefix to the kind of work. PRs target `main`.
 
 ## Conventions

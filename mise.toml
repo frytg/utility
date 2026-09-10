@@ -1,0 +1,5 @@
+[tools]
+node = "26"
+deno = "canary"
+bun = "latest"
+just = "latest"

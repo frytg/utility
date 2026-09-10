@@ -13,6 +13,5 @@
 		"sinon": "^22.1.0",
 		"tsx": "^4.23.13",
 		"winston": "^3.19.0"
-	},
-	"packageManager": "nub@0.4.7"
+	}
 }
