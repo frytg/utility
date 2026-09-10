@@ -16,8 +16,7 @@ This rule applies even when the change looks safe, the tests pass, and the commi
 
 ## Tooling
 
-- **Linter / formatter:** Biome 2.5. Driven by `just lint` and `just format`; config in `biome.json`. Tabs, single quotes, 120 cols, trailing commas, semicolons as needed.
-  - The dotfiles global default is `oxlint + oxfmt`; this repo predates that and uses Biome. Do not migrate without an explicit ask.
+- **Linter / formatter:** oxlint + oxfmt. Driven by `just lint` and `just format`; config in `.oxlintrc.json` + `.oxfmtrc.json`. Tabs, single quotes, 120 cols, trailing commas, semicolons as needed.
 - **Task runner:** `just` (`justfile`). Recipes: `test`, `lint`, `format`, `update`, `bench-logger`.
 - **Package manager:** Nub (`nub@0.4.7` pinned in `package.json#packageManager`). `.npmrc` routes the `@jsr:` scope through `https://npm.jsr.io`. Node version pinned to `26` via `.node-version`.
 - **Deno:** vendored install (`deno install --vendor`), `deno test`, and `deno publish`. Pinned to `canary` in CI.
@@ -25,9 +24,9 @@ This rule applies even when the change looks safe, the tests pass, and the commi
 
 ## Daily commands
 
-- `just lint` — Biome lint across the whole tree.
+- `just lint` — oxlint across the whole tree.
 - `just test` — `deno test --allow-sys --allow-env --clean --coverage`.
-- `just format` — `nubx biome lint --write && nubx biome format --write`.
+- `just format` — `nubx oxlint --fix && nubx oxfmt`.
 - `just update` — `deno outdated --update --latest --recursive` to refresh JSR/NPM dep versions.
 - `just bench-logger` — run the logger micro-bench.
 - `nub ci && bun test` — Bun smoke (CI only; no `node_modules` is shipped).
@@ -41,7 +40,7 @@ This rule applies even when the change looks safe, the tests pass, and the commi
 - Use the `node:` import scheme (`import os from 'node:os'`, `import { createHash } from 'node:crypto'`).
 - JSDoc with `@module`, `@example`, `@param`, `@returns` on every exported function. Tests and modules go through JSR's doc renderer — write docs that survive triple-backtick rendering.
 - File naming: `kebab-case.ts`; tests sit next to source as `*.test.ts`.
-- Keep modules portable across Bun / Deno / Node. Avoid runtime-specific globals in library code; `Bun` and `Deno` are listed as Biome globals but only at the edges (env detection, optional integrations).
+- Keep modules portable across Bun / Deno / Node. Avoid runtime-specific globals in library code; `Bun` and `Deno` are listed as oxlint globals but only at the edges (env detection, optional integrations).
 - No drive-by refactors, magic numbers, or commented-out code in a diff. Bug fixes ship with a regression test.
 
 ## Publishing
@@ -66,4 +65,4 @@ This rule applies even when the change looks safe, the tests pass, and the commi
 
 ## Composition with global AGENTS.md
 
-The dotfiles-level `AGENTS.md` is the baseline. This file overrides only where this repo genuinely differs: Biome instead of oxlint/oxfmt; Tangled → GitHub → JSR publishing flow; cross-runtime test discipline; the Deno workspace layout. Everything else — secret handling, commit style, package-manager preference, JSDoc habits, language defaults — inherits unchanged.
+The dotfiles-level `AGENTS.md` is the baseline. This file overrides only where this repo genuinely differs: Tangled → GitHub → JSR publishing flow; cross-runtime test discipline; the Deno workspace layout. Everything else — secret handling, commit style, package-manager preference, JSDoc habits, language defaults — inherits unchanged.

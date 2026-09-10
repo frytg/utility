@@ -12,8 +12,8 @@ bench-logger:
 	deno run bench-logger
 
 lint:
-	deno run -A @biomejs/biome lint
+	deno run -A oxlint
 
 format:
-	nubx biome lint --write
-	nubx biome format --write
+	nubx oxlint --fix
+	nubx oxfmt

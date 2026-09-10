@@ -1,0 +1,34 @@
+{
+	"$schema": "./node_modules/oxlint/configuration_schema.json",
+	"ignorePatterns": [
+		"**/node_modules/**",
+		"**/vendor/**",
+		"**/coverage/**",
+		"**/*.sops.*"
+	],
+	"categories": {
+		"correctness": "warn",
+		"nursery": "off",
+		"pedantic": "off",
+		"perf": "off",
+		"restriction": "off",
+		"style": "off",
+		"suspicious": "warn"
+	},
+	"rules": {
+		"import/no-nodejs-modules": "off",
+		"no-param-reassign": "error",
+		"typescript/prefer-as-const": "error",
+		"default-param-last": "error",
+		"typescript/prefer-enum-initializers": "error",
+		"unicorn/prefer-number-properties": "error",
+		"typescript/no-inferrable-types": "error",
+		"no-unassigned-imports": "off"
+	},
+	"plugins": ["oxc", "typescript", "unicorn", "import"],
+	"globals": {
+		"Bun": "readonly",
+		"Deno": "readonly",
+		"node": "readonly"
+	}
+}

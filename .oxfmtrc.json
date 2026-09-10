@@ -1,0 +1,47 @@
+{
+	"$schema": "./node_modules/oxfmt/configuration_schema.json",
+	"useTabs": true,
+	"tabWidth": 2,
+	"printWidth": 120,
+	"singleQuote": true,
+	"jsxSingleQuote": false,
+	"quoteProps": "as-needed",
+	"trailingComma": "all",
+	"semi": false,
+	"arrowParens": "always",
+	"bracketSameLine": false,
+	"bracketSpacing": true,
+	"ignorePatterns": [
+		"**/node_modules/**",
+		"**/vendor/**",
+		"**/coverage/**",
+		"**/*.sops.*"
+	],
+	"sortImports": {
+		"groups": [
+			"type-builtin",
+			"type-external",
+			"type-internal",
+			"type-subpath",
+			["type-parent", "type-sibling", "type-index"],
+			"builtin",
+			"external",
+			"internal",
+			"subpath",
+			["parent", "sibling", "index"],
+			"side_effect",
+			"style",
+			"unknown"
+		],
+		"newlinesBetween": false,
+		"customGroups": [
+			{
+				"groupName": "cross-test",
+				"elementNamePattern": ["@cross/test", "@std/assert", "@std/fmt", "sinon"]
+			}
+		]
+	},
+	"sortPackageJson": {
+		"sortScripts": true
+	}
+}

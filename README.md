@@ -2,7 +2,7 @@
 
 [![JSR @frytg](https://jsr.io/badges/@frytg)](https://jsr.io/@frytg)
 [![ci](https://github.com/frytg/utility/actions/workflows/test.yml/badge.svg?branch=main)](https://github.com/frytg/utility/actions/workflows/test.yml)
-[![Linted with Biome](https://img.shields.io/badge/Linted_with-Biome-60a5fa?style=flat&logo=biome)](https://biomejs.dev)
+[![Linted with oxlint](https://img.shields.io/badge/Linted_with-oxlint-1A2C7A?style=flat&logo=oxc)](https://oxc.rs)
 
 A collection of utilities for TypeScript and JavaScript.
 
@@ -19,7 +19,7 @@ It is tested against Bun, Deno, and Node.js runtimes. Published on [jsr.io (`@fr
 
 ## Lint
 
-Uses Biome to check the code.
+Uses oxlint + oxfmt to check and format the code.
 
 ```bash
 just lint
