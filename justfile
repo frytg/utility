@@ -2,9 +2,6 @@
 _default:
 	just --list
 
-update:
-	deno run update
-
 test:
 	deno test --allow-sys --allow-env --clean --coverage
 
@@ -17,3 +14,16 @@ lint:
 format:
 	bunx oxlint --fix
 	bunx oxfmt
+
+# install toolchain (mise)
+[group('DEV-SETUP')]
+install *args:
+	mise install {{ args }}
+
+# update package dependencies
+[group('DEV-SETUP')]
+update *args:
+	deno run update
+	mise upgrade --bump -y --local {{ args }}
+	mise outdated --quiet {{ args }}
+	mise lock {{ args }}

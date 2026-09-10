@@ -1,5 +1,5 @@
 [tools]
 node = "26"
-deno = "canary"
+deno = "latest"
 bun = "latest"
 just = "latest"
