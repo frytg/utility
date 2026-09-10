@@ -13,6 +13,7 @@ steps:
       set -euo pipefail
       apk add --no-cache bash curl
       curl -fsSL https://mise.run | MISE_INSTALL_PATH="$HOME/.local/bin/mise" sh
+      export PATH="$HOME/.local/bin:$PATH"
       mise --version
   - name: "Install dependencies"
     command: |
