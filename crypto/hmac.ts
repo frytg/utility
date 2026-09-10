@@ -11,7 +11,6 @@
  * @module
  */
 
-// load packages
 // deno-fmt-ignore
 import { Buffer, atob } from 'node:buffer'
 import { createHmac } from 'node:crypto'
@@ -78,7 +77,7 @@ export const bufferFromBase64 = (base64: string, preferNativeError = false): Buf
 	} catch (error) {
 		// the native error varies between runtimes, so the default is to throw our own error
 		if (preferNativeError) throw error
-		throw new Error('Invalid base64 string')
+		throw new Error('Invalid base64 string', { cause: error })
 	}
 }
 

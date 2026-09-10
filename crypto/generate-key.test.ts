@@ -1,9 +1,6 @@
-// load packages
 import { Buffer } from 'node:buffer'
 import { test } from '@cross/test'
 import { assertEquals, assertExists } from '@std/assert'
-
-// load module
 import { generateKey } from './generate-key.ts'
 
 test('generateKey - generates keys of correct length', () => {

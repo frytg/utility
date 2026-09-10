@@ -4,9 +4,9 @@
 	"type": "module",
 	"devDependencies": {
 		"@cross/test": "npm:@jsr/cross__test@^0.0.14",
+		"@frytg/logger": "npm:@jsr/frytg__logger@^0.0.3",
 		"@std/assert": "npm:@jsr/std__assert@^1.0.19",
 		"@std/fmt": "npm:@jsr/std__fmt@^1.0.10",
-		"@frytg/logger": "npm:@jsr/frytg__logger@^0.0.3",
 		"luxon": "^3.7.2",
 		"oxfmt": "^0.67.0",
 		"oxlint": "^1.82.0",
@@ -14,8 +14,5 @@
 		"tsx": "^4.23.13",
 		"winston": "^3.19.0"
 	},
-	"packageManager": "nub@0.4.7",
-	"scripts": {
-		"test": "tsx --test **/*.test.ts"
-	}
+	"packageManager": "nub@0.4.7"
 }

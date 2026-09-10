@@ -1,9 +1,7 @@
-// load packages
 import process from 'node:process'
 import { test } from '@cross/test'
 import logger from '@frytg/logger'
 import sinon from 'sinon'
-
 import { exitWithError } from './exit-with-error.ts'
 
 test('exitWithError - returns when variable exists (string)', () => {

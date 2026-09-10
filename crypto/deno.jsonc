@@ -6,9 +6,9 @@
 		"./hash": "./hash.ts",
 		"./hmac": "./hmac.ts",
 		"./generate-default-keys": "./generate-default-keys.ts",
-		"./generate-key": "./generate-key.ts"
+		"./generate-key": "./generate-key.ts",
 	},
 	"publish": {
-		"exclude": ["*.test.ts"]
-	}
+		"exclude": ["*.test.ts"],
+	},
 }

@@ -1,6 +1,5 @@
 import { test } from '@cross/test'
 import { assertEquals } from '@std/assert'
-
 import { formatDuration } from './dates.ts'
 
 test('formatDuration - formats milliseconds correctly', () => {

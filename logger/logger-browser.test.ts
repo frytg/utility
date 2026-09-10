@@ -1,7 +1,6 @@
 import { test } from '@cross/test'
 import { assertEquals, assertExists } from '@std/assert'
 import sinon from 'sinon'
-
 import { logger } from './logger-browser.ts'
 
 test('logger browser - logs structured event fields', () => {

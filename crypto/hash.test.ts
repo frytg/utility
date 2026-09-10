@@ -1,8 +1,5 @@
-// load packages
 import { test } from '@cross/test'
 import { assertEquals } from '@std/assert'
-
-// load module
 import { hashSha256, hashSha512 } from './hash.ts'
 
 test('hashSha256 - generates correct SHA-256 hashes', () => {

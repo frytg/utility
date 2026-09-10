@@ -18,7 +18,7 @@ Debug logs will only be logged if the env `STAGE` is set to `dev`.
 ### Server (Node.js, Deno, Bun)
 
 ```ts
-import logger from '@frytg/logger';
+import logger from '@frytg/logger'
 ```
 
 ### Browser
@@ -26,12 +26,12 @@ import logger from '@frytg/logger';
 Use the dedicated browser entry for frontend apps (Vue, React, etc.). It is a structured `console` replacement with the same call style as the server logger, without server deployment env injection.
 
 ```ts
-import logger from '@frytg/logger/browser';
+import logger from '@frytg/logger/browser'
 
 logger.info('user signed in', {
-  source: 'components/LoginForm',
-  data: { method: 'oauth' },
-});
+	source: 'components/LoginForm',
+	data: { method: 'oauth' },
+})
 ```
 
 In development builds (`import.meta.env.DEV` or `import.meta.env.MODE === 'development'`), debug logs are enabled and output is pretty-printed JSON. Production builds log `info` and above as compact JSON.

@@ -6,9 +6,9 @@
 	"imports": {
 		"@std/fmt": "jsr:@std/fmt@^1.0.10",
 		"@types/luxon": "npm:@types/luxon@^3.7.5",
-		"luxon": "npm:luxon@^3.7.2"
+		"luxon": "npm:luxon@^3.7.2",
 	},
 	"publish": {
-		"exclude": ["*.test.ts"]
-	}
+		"exclude": ["*.test.ts"],
+	},
 }

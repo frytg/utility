@@ -1,9 +1,6 @@
-// load packages
 import { Buffer } from 'node:buffer'
 import { test } from '@cross/test'
 import { assertEquals, assertThrows } from '@std/assert'
-
-// load module
 import { bufferFromBase64, bufferFromHex } from './hmac.ts'
 
 test('bufferFromBase64 - converts base64 strings to Buffer correctly', () => {

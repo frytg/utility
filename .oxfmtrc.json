@@ -11,12 +11,7 @@
 	"arrowParens": "always",
 	"bracketSameLine": false,
 	"bracketSpacing": true,
-	"ignorePatterns": [
-		"**/node_modules/**",
-		"**/vendor/**",
-		"**/coverage/**",
-		"**/*.sops.*"
-	],
+	"ignorePatterns": ["**/node_modules/**", "**/vendor/**", "**/coverage/**", "**/*.sops.*", "**/*.yml", "**/*.yaml"],
 	"sortImports": {
 		"groups": [
 			"type-builtin",

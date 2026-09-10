@@ -4,13 +4,13 @@
 		"exactOptionalPropertyTypes": true,
 		"useUnknownInCatchVariables": true,
 		"noImplicitOverride": true,
-		"noUncheckedIndexedAccess": true
+		"noUncheckedIndexedAccess": true,
 	},
 	"exclude": [".git", ".github", "vendor"],
 	"tasks": {
 		"bench-logger": "deno run -A logger/benchmark.ts",
 		"dry-run": "deno publish --dry-run",
-		"update": "deno outdated --update --latest --recursive"
+		"update": "deno outdated --update --latest --recursive",
 	},
 	"workspace": ["./check-required-env", "./crypto", "./dates", "./logger"],
 	"imports": {
@@ -20,6 +20,6 @@
 		"@types/sinon": "npm:@types/sinon@^22.0.0",
 		"oxfmt": "npm:oxfmt@^0.67.0",
 		"oxlint": "npm:oxlint@^1.82.0",
-		"sinon": "npm:sinon@^22.1.0"
-	}
+		"sinon": "npm:sinon@^22.1.0",
+	},
 }

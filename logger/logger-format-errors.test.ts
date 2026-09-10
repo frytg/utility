@@ -2,7 +2,6 @@ import process from 'node:process'
 import { test } from '@cross/test'
 import { assertEquals, assertExists } from '@std/assert'
 import sinon from 'sinon'
-
 import logger from './logger.ts'
 
 test('logger - formats errors correctly', () => {

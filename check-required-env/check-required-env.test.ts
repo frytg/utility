@@ -2,7 +2,6 @@ import process from 'node:process'
 import { test } from '@cross/test'
 import { assertExists } from '@std/assert'
 import sinon from 'sinon'
-
 import { checkRequiredEnv } from './check-required-env.ts'
 
 test('checkRequiredEnv - returns when env variable exists', () => {

@@ -1,11 +1,6 @@
 {
 	"$schema": "./node_modules/oxlint/configuration_schema.json",
-	"ignorePatterns": [
-		"**/node_modules/**",
-		"**/vendor/**",
-		"**/coverage/**",
-		"**/*.sops.*"
-	],
+	"ignorePatterns": ["**/node_modules/**", "**/vendor/**", "**/coverage/**", "**/*.sops.*"],
 	"categories": {
 		"correctness": "warn",
 		"nursery": "off",
@@ -22,8 +17,7 @@
 		"default-param-last": "error",
 		"typescript/prefer-enum-initializers": "error",
 		"unicorn/prefer-number-properties": "error",
-		"typescript/no-inferrable-types": "error",
-		"no-unassigned-imports": "off"
+		"typescript/no-inferrable-types": "error"
 	},
 	"plugins": ["oxc", "typescript", "unicorn", "import"],
 	"globals": {

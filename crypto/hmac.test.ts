@@ -1,8 +1,5 @@
-// load packages
 import { test } from '@cross/test'
 import { assertEquals } from '@std/assert'
-
-// load module
 import { hmacSha256, hmacSha512 } from './hmac.ts'
 
 test('hmacSha256 - generates correct HMAC SHA-256 hashes', () => {

@@ -5,12 +5,12 @@
 	"exports": {
 		".": "./check-required-env.ts",
 		"./get": "./get-required-env.ts",
-		"./exit": "./exit-with-error.ts"
+		"./exit": "./exit-with-error.ts",
 	},
 	"imports": {
-		"@frytg/logger": "jsr:@frytg/logger@0.0.3"
+		"@frytg/logger": "jsr:@frytg/logger@0.0.3",
 	},
 	"publish": {
-		"exclude": ["*.test.ts"]
-	}
+		"exclude": ["*.test.ts"],
+	},
 }

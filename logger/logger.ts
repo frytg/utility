@@ -3,12 +3,10 @@
  * A pre-configured logger that is ready to use with syslog levels.
  */
 
-// load packages
+import type { Logform, Logger } from 'winston'
 import os from 'node:os'
 import process from 'node:process'
-import type { Logform, Logger } from 'winston'
 import { createLogger, format, transports } from 'winston'
-
 import { serializeError } from './serialize-error.ts'
 import { SYSLOG_LEVELS } from './syslog-levels.ts'
 

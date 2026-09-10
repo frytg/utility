@@ -1,4 +1,3 @@
-// load packages
 import process from 'node:process'
 import logger from '@frytg/logger'
 

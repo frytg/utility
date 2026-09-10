@@ -4,12 +4,12 @@
 	"version": "0.2.0",
 	"exports": {
 		".": "./logger.ts",
-		"./browser": "./logger-browser.ts"
+		"./browser": "./logger-browser.ts",
 	},
 	"imports": {
-		"winston": "npm:winston@^3.19.0"
+		"winston": "npm:winston@^3.19.0",
 	},
 	"publish": {
-		"exclude": ["*.test.ts", "benchmark.ts"]
-	}
+		"exclude": ["*.test.ts", "benchmark.ts"],
+	},
 }

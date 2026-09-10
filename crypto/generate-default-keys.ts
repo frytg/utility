@@ -9,7 +9,6 @@
  * @module
  */
 
-// load module
 import { generateKey } from './generate-key.ts'
 
 generateKey(32)
